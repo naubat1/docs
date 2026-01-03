@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Naubat Docs",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -11,77 +11,47 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Introducción",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "index"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Cómo funciona",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "how-it-works/overview",
+              "how-it-works/app-and-dongle",
+              "how-it-works/data-and-privacy"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Primeros pasos",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "getting-started/installation",
+              "getting-started/connect-dongle",
+              "getting-started/app-permissions",
+              "getting-started/background-usage"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Compatibilidad",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
+              "compatibility/vehicles",
+              "compatibility/dongles"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "FAQ",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "faq"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -90,16 +60,12 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Naubat",
+        "href": "https://naubat.com"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
+    ]
+  }
+  ,
   "contextual": {
     "options": [
      "copy",
