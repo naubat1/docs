@@ -1,0 +1,38 @@
+---
+title: "Known Limitations"
+description: "Operational constraints and expected variability"
+---
+
+# Known Limitations
+
+Reliable vehicle diagnostics depend on multiple external factors, including operating system policies, dongle behavior, and model-specific vehicle responses.
+
+## Operating System Constraints
+
+### Android
+
+Background execution may be affected by manufacturer battery and process optimization policies.
+A foreground notification is required during persistent background operation.
+Battery optimization settings may need adjustment to improve reliability.
+
+### iOS
+
+If Bluetooth is toggled, reopening the app may be required in certain scenarios.
+Background behavior remains subject to iOS system policies and lifecycle controls.
+
+## Communication Variability
+
+Some vehicles may return negative responses to specific requests.
+Temporary communication errors can occur during normal operation.
+Signal availability and response consistency vary by model.
+
+## Data Gaps
+
+Sampling gaps may occur under real-world conditions.
+The dashboard evaluates data quality before presenting metrics.
+Unreliable data is not silently accepted into presented results.
+
+## Responsibility Disclaimer (Soft)
+
+Naubat provides structured data acquisition and processing.
+Final signal availability depends on vehicle implementation details and hardware quality.

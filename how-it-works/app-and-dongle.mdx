@@ -1,0 +1,52 @@
+---
+title: "App and Dongle"
+description: "How Naubat communicates with the vehicle through a BLE OBD-II dongle"
+---
+
+# App and Dongle
+
+Naubat communicates directly with the vehicle diagnostic system through a Bluetooth Low Energy OBD-II dongle. The communication model follows standard automotive diagnostic procedures used by professional diagnostic tools.
+
+Diagram placeholder: Smartphone to BLE dongle to OBD port to vehicle ECUs.
+
+## Diagnostic Communication
+
+Modern vehicles include multiple Electronic Control Units, also known as ECUs.
+These ECUs exchange information through internal vehicle networks.
+Automotive diagnostic standards provide structured read access to vehicle parameters.
+Naubat uses standardized diagnostic services, including UDS, Unified Diagnostic Services.
+This class of communication is used in professional workshops and during vehicle servicing.
+
+Naubat performs read-only diagnostic requests.
+No vehicle parameters are modified.
+No coding, flashing, or configuration changes are performed.
+
+This read-only model is non-intrusive and designed for safe operation.
+
+## What Is an OBD Dongle?
+
+The OBD-II port provides standardized physical access to vehicle diagnostics.
+A Bluetooth dongle acts as the communication bridge between smartphone and vehicle.
+Most consumer dongles are based on ELM327-compatible chipsets.
+ELM327 is a widely adopted diagnostic interpreter chip used across many tools.
+
+There are multiple firmware versions and quality levels.
+Connection stability and firmware quality affect communication reliability.
+Naubat requires BLE dongles for stable background operation.
+
+## Communication Model
+
+The app detects the dongle automatically when it is in range.
+When the vehicle becomes active, structured diagnostic requests are initiated.
+Data collection continues while the vehicle is operating.
+When the vehicle returns to idle state, communication activity pauses.
+
+## Energy Consumption and 12V Battery Impact
+
+Most commercial dongles consume only tens of milliamps during operation.
+Many modern dongles include auto-sleep or low-power modes.
+When no vehicle or Bluetooth activity is detected, these dongles typically enter reduced-power state.
+Naubat communicates only when necessary for diagnostic collection.
+
+The system is designed not to cause significant 12V battery drain in normal use.
+For extended inactivity periods of several days or more, unplugging the dongle is recommended as a precaution.

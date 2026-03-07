@@ -1,0 +1,70 @@
+---
+title: "Global Stats"
+description: "Historical aggregated view of logged vehicle activity"
+---
+
+# Global Stats
+
+The Global Stats dashboard provides a historical, aggregated view of all logged driving data. It is available only for subscribed users. It reflects only data recorded while the app was actively logging. Aggregated metrics automatically exclude trips marked as unreliable (`excludeFromAggregates = true`).
+
+## 1. Logged Activity
+
+This section summarizes core activity and energy metrics across valid logged trips.
+
+- Trips logged: Total number of trips included in aggregation after reliability filtering.
+- Total Distance (km): Distance recorded by Naubat during logged trips, not the vehicle's full odometer distance.
+- Total Electric Driving Time (h): Total time the vehicle was operating electrically during included trips.
+- Total Charging Time (h): Total duration of charging periods detected during logged sessions.
+- Avg Charging Power (kW): Mean charging power across logged charging intervals.
+- Equivalent Battery Cycles: Estimated from accumulated discharged energy divided by nominal battery capacity.
+- Avg Battery Operating Temperature (°C): Mean battery temperature during included operating periods.
+- Avg Regeneration Ratio (%): Recovered energy relative to total energy used.
+- Avg Consumption - Electric (kWh/100km): Average electrical energy consumed per 100 km.
+- Avg Consumption - Equivalent gasoline (L/100km): Consumption equivalent derived from user-configured energy prices.
+
+All aggregated metrics in this section exclude unreliable trips automatically.
+
+[Screenshot placeholder: Logged Activity section]
+
+## 2. Driving Patterns
+
+This section describes typical trip behavior using robust central measures.
+
+- Typical Distance per Trip (median-based): Median trip distance across included trips.
+- Typical Energy per Trip (median-based): Median trip energy use across included trips.
+- Typical Power Demand (median-based): Median power demand representative of normal usage.
+
+Median is used instead of average to reduce distortion from extreme trips. The Top range highlights where most trips fall, using percentage-based distribution ranges.
+
+[Screenshot placeholder: Driving Patterns section]
+
+## 3. Efficiency & Energy Use
+
+This section shows how operating conditions relate to energy consumption using trip-level scatter plots.
+
+1. Consumption vs Average Speed
+
+Each point represents one trip. This view helps identify how efficiency changes with driving style and speed profile. Only reliable trips are included.
+
+2. Consumption vs Outdoor Temperature
+
+Each point represents one trip. This view highlights seasonal impact on consumption and helps identify typical winter efficiency penalties.
+
+[Screenshot placeholder: Consumption vs Speed]
+[Screenshot placeholder: Consumption vs Temperature]
+
+## 4. Trends Over Time
+
+This section presents monthly distance and energy as accumulated bar-chart totals over the selected time range. It is intended to show usage evolution and changes in driving intensity over time.
+
+[Screenshot placeholder: Monthly Trends]
+
+## 5. Accumulated Cost
+
+This section compares cumulative operating cost scenarios.
+
+EV cost is estimated from battery energy used, adjusted by an efficiency factor. Equivalent gasoline and diesel costs are calculated for comparison. Electricity and fuel prices are user-configurable. This is a comparative cost tool, not an exact accounting statement.
+
+[Screenshot placeholder: Accumulated Cost section]
+
+Global Stats is designed to provide long-term insight into efficiency, usage, and battery stress over time, and it continues to evolve as analytics improve.

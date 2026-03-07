@@ -1,0 +1,36 @@
+---
+title: "App Permissions"
+description: "Permissions required for reliable BLE and background operation"
+---
+
+# App Permissions
+
+Certain permissions are required to maintain reliable background operation and Bluetooth communication between the app, dongle, and vehicle.
+
+## Required Permissions
+
+### Bluetooth
+
+Bluetooth permission is required to discover compatible dongles, establish communication, and maintain diagnostic sessions during normal operation.
+
+### Location (Android)
+
+On Android, location permission is required by the operating system for Bluetooth Low Energy scanning.
+It is not used for tracking.
+It is used only for nearby device discovery required to find compatible dongles.
+
+### Background Operation
+
+On Android, a foreground service notification is required when persistent background activity is active.
+This requirement allows the system to keep the process available for reliable operation.
+The notification indicates operational status such as Disconnected, Idle, or Collecting Data.
+
+## Manufacturer-Specific Settings (Android)
+
+Some Android manufacturers apply aggressive battery optimization policies.
+Users may need to disable battery optimization for Naubat to improve background reliability.
+Platform guidance by manufacturer will be expanded progressively in the documentation.
+
+## Transparency Note
+
+> If the application is manually closed, data collection will stop until it is opened again.

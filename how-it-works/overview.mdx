@@ -1,0 +1,38 @@
+---
+title: "How It Works"
+description: "High-level data flow from vehicle diagnostics to analytics"
+---
+
+# How It Works
+
+Naubat collects structured diagnostic data from the vehicle through a Bluetooth Low Energy connection. The mobile app acts as a data gateway between the vehicle and the cloud platform, where signal processing and metric generation are performed.
+
+## Step 1 — Connection
+
+A Bluetooth Low Energy diagnostic dongle is connected to the vehicle interface.
+The mobile application performs secure pairing with the dongle.
+After pairing is complete, the app establishes a communication session for diagnostic exchange.
+
+## Step 2 — Structured Data Requests
+
+The app communicates with vehicle control units using the standardized UDS protocol.
+Requests are sent at a controlled cadence.
+Relevant vehicle control units return structured data responses.
+Sampling frequency is intentionally kept well below typical CAN bus operating loads, while remaining sufficient to capture the signal quality needed for later battery-state analysis.
+
+## Step 3 — Signal Processing
+
+Collected signals are transmitted to the cloud for processing.
+Raw signals are normalized into consistent units and formats.
+Data integrity checks are applied to detect incomplete, inconsistent, or out-of-range values.
+Invalid samples are filtered before metric computation.
+
+## Step 4 — Metric Generation
+
+Metrics are generated in the backend from validated processed signals.
+Trip and energy indicators are derived from this processed dataset.
+Battery-related analytics are computed server-side from structured historical and session data.
+
+## Conceptual Data Flow
+
+`Phone App (Gateway) -> BLE Dongle -> Vehicle ECU -> UDS Signals -> Cloud Processing -> Backend Metrics`
