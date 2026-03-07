@@ -1,0 +1,46 @@
+---
+title: "Dashboard Overview"
+description: "Conceptual structure of the Naubat dashboard"
+---
+
+# Dashboard Overview
+
+The Naubat dashboard is organized into three analytical layers, each aligned with a different time horizon of vehicle data. All displayed information comes from structured diagnostic acquisition performed while the app is active.
+
+## Three Analytical Layers
+
+### 1. Latest Readings - Instantaneous State
+
+This layer displays the most recent validated values logged from the vehicle.
+It behaves near real-time when the app is in Collecting Data mode.
+It reflects the current electrical and thermal state of the battery system.
+It is designed for monitoring.
+
+### 2. Trips - Session-Level Analysis
+
+This layer organizes data into driving sessions.
+Each trip is segmented automatically.
+Data continuity rules may split a session if upload interruptions exceed a defined threshold.
+Quality indicators are applied to each trip.
+It is designed for behavioral analysis and driving efficiency understanding.
+
+### 3. Global Stats - Historical Aggregation
+
+This layer aggregates validated trips over time.
+Only trips that pass reliability criteria are included.
+It provides long-term insight into efficiency, usage patterns, charging behavior, and battery stress.
+It is designed for trend analysis.
+
+## Data Validation Philosophy
+
+Naubat does not silently accept unreliable data.
+Data continuity, signal stability, and communication quality are evaluated before analysis.
+Trips marked as unreliable are excluded from aggregated statistics.
+Transparency about data source and quality is a core design principle.
+
+## Update Model
+
+Latest Readings update continuously while the vehicle is active.
+Trips are processed after session completion.
+Global Stats are updated from validated historical data.
+Internet interruptions may affect how sessions are presented, but not necessarily data acquisition.

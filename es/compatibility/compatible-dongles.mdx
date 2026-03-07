@@ -1,0 +1,57 @@
+---
+title: "Dongles compatibles"
+description: "Qué dongles OBD funcionan con Naubat y cuáles son los más recomendables"
+---
+
+# Dongles compatibles
+
+Naubat funciona con dongles OBD-II **Bluetooth Low Energy (BLE)**.
+No funciona con adaptadores de Bluetooth clásico.
+
+## Requisitos mínimos de compatibilidad
+
+Un dongle es compatible si:
+- Usa BLE (no Bluetooth clásico).
+- Es un dongle abierto (no bloqueado a una app concreta).
+- Soporta el modelo de comandos ELM327 o equivalente compatible.
+- Permite intercambio estable de mensajes de diagnóstico con el vehículo.
+
+<Warning>
+Algunos dongles parecen compatibles por hardware, pero están bloqueados a un ecosistema concreto. En esos casos, Naubat no es compatible.
+</Warning>
+
+## Marcas frecuentes
+
+Las familias más habituales son:
+- **Vgate**
+- **Veepeak**
+
+## Qué hace mejor a un dongle para Naubat
+
+1. Rendimiento y respuesta
+2. Comportamiento de auto-sleep / auto-wakeup
+3. Precisión de lectura de voltaje
+
+### Auto-sleep y auto-wakeup
+
+El comportamiento ideal:
+- Vehículo apagado -> dongle entra en reposo.
+- En reposo -> deja de ser visible por Bluetooth.
+- Vehículo activo -> despierta y vuelve a estar disponible.
+
+Hoy, nuestra recomendación principal es **vLinker FD+** por comportamiento estable y predecible.
+
+### Precisión de voltaje
+
+Naubat consulta voltaje de alimentación con `AT RV`.
+Una desviación grande puede afectar lógica de estado (`Idle` vs `Collecting Data`).
+
+## Recomendación práctica
+
+Si quieres máxima estabilidad:
+- Dongle BLE abierto a apps de terceros
+- Compatible con ELM327
+- Buen auto-sleep/auto-wakeup
+- Lectura de voltaje razonablemente precisa
+
+Recomendación actual: **vLinker FD+**.

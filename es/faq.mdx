@@ -1,0 +1,69 @@
+---
+title: "Preguntas frecuentes"
+description: "Preguntas prácticas sobre funcionamiento, precisión y limitaciones de Naubat"
+---
+
+# Preguntas frecuentes
+
+## Funcionamiento de la app
+
+### ¿La app debe estar abierta para registrar viajes?
+
+La app debe permanecer ejecutándose en segundo plano.
+Si se cierra manualmente, no se registran viajes.
+
+### ¿Tengo que abrir la app antes de cada trayecto?
+
+No, si ya está activa en segundo plano.
+En algunos Android con restricciones agresivas puede ayudar abrirla de vez en cuando.
+
+### ¿Por qué hay una notificación persistente en Android?
+
+Android requiere una notificación de servicio en primer plano para funcionamiento estable en segundo plano.
+Muestra el estado: `Disconnected`, `Idle` o `Collecting Data`.
+
+## Dongles
+
+### ¿Qué tipo de dongle necesito?
+
+Un dongle BLE.
+Lo habitual es que sea compatible con ELM327.
+
+### ¿Sirve cualquier dongle barato?
+
+No siempre. Algunos adaptadores genéricos son inestables y generan huecos de datos.
+
+### ¿El dongle descarga la batería de 12V?
+
+En uso normal, no debería generar un riesgo significativo.
+Para periodos largos sin usar el coche, se recomienda desconectarlo.
+
+### ¿Es seguro para mi vehículo?
+
+Sí. Naubat solo hace lectura.
+No realiza codificación ni cambios de configuración.
+
+## Conectividad
+
+### ¿Por qué se ha dividido un viaje en dos?
+
+Si hay una interrupción larga en la subida de datos, una sesión puede mostrarse como dos viajes.
+
+### ¿Por qué sigo viendo conectado al alejarme del coche?
+
+El alcance BLE puede ser alto.
+Si el vehículo está en reposo, la app debería pasar a `Idle`.
+
+## Datos y precisión
+
+### ¿Por qué algunos valores no se actualizan?
+
+Puede deberse a vehículo en reposo, desconexión o inestabilidad temporal de comunicación.
+
+### ¿Por qué el consumo difiere del del coche?
+
+Puede haber diferencias de metodología, fuente de distancia (GPS vs odómetro) y redondeos del fabricante.
+
+### ¿Dónde se alojan mis datos?
+
+Los datos se almacenan en infraestructura AWS con controles de seguridad.

@@ -11,45 +11,89 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
+        "tab": "ES",
         "groups": [
           {
-            "group": "Introduction",
+            "group": "Introducción",
             "pages": [
-              "index"
+              "es/index"
             ]
           },
           {
-            "group": "How it works",
+            "group": "Cómo funciona",
             "pages": [
-              "how-it-works/overview",
-              "how-it-works/app-and-dongle",
-              "how-it-works/data-collected",
-              "how-it-works/privacy-and-independence"
+              "es/how-it-works/overview",
+              "es/how-it-works/app-and-dongle",
+              "es/how-it-works/data-collected",
+              "es/how-it-works/privacy-and-independence"
             ]
           },
           {
-            "group": "Getting started",
+            "group": "Primeros pasos",
             "pages": [
-              "getting-started/app-installation",
-              "getting-started/connecting-the-dongle",
-              "getting-started/app-permissions",
-              "getting-started/background-usage",
-              "getting-started/first-data-and-timing"
+              "es/getting-started/app-installation",
+              "es/getting-started/connecting-the-dongle",
+              "es/getting-started/app-permissions",
+              "es/getting-started/background-usage",
+              "es/getting-started/first-data-and-timing"
             ]
           },
           {
-            "group": "Compatibility",
+            "group": "Compatibilidad",
             "pages": [
-              "compatibility/vehicle-types",
-              "compatibility/compatible-dongles",
-              "compatibility/known-limitations"
+              "es/compatibility/vehicle-types",
+              "es/compatibility/compatible-dongles",
+              "es/compatibility/known-limitations"
             ]
           },
           {
             "group": "FAQ",
             "pages": [
-              "faq"
+              "es/faq"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "EN",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "en/index"
+            ]
+          },
+          {
+            "group": "How it works",
+            "pages": [
+              "en/how-it-works/overview",
+              "en/how-it-works/app-and-dongle",
+              "en/how-it-works/data-collected",
+              "en/how-it-works/privacy-and-independence"
+            ]
+          },
+          {
+            "group": "Getting started",
+            "pages": [
+              "en/getting-started/app-installation",
+              "en/getting-started/connecting-the-dongle",
+              "en/getting-started/app-permissions",
+              "en/getting-started/background-usage",
+              "en/getting-started/first-data-and-timing"
+            ]
+          },
+          {
+            "group": "Compatibility",
+            "pages": [
+              "en/compatibility/vehicle-types",
+              "en/compatibility/compatible-dongles",
+              "en/compatibility/known-limitations"
+            ]
+          },
+          {
+            "group": "FAQ",
+            "pages": [
+              "en/faq"
             ]
           }
         ]
@@ -70,6 +114,14 @@
       {
         "label": "Naubat",
         "href": "https://naubat.com"
+      },
+      {
+        "label": "ES",
+        "href": "/es"
+      },
+      {
+        "label": "EN",
+        "href": "/en"
       }
     ]
   }

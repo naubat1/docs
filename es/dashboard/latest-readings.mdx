@@ -1,0 +1,57 @@
+---
+title: "Latest Readings"
+description: "How to interpret the latest validated vehicle signals"
+---
+
+# Latest Readings
+
+This panel displays the most recent validated value logged for each key vehicle parameter. If the app is in "Collecting Data" mode, values update near real-time. If the vehicle is idle or disconnected, the last valid values remain visible. This panel reflects the instantaneous electrical and thermal state of the vehicle.
+
+[Screenshot placeholder: Full Latest Readings panel]
+
+## 1. State of Charge and Health
+
+BMS SoC is the state of charge reported by the Battery Management System.
+Displayed SoC is the value shown in the vehicle interface for the driver.
+BMS SoH is the State of Health value internally reported by the vehicle.
+
+BMS SoC may differ slightly from Displayed SoC due to rounding and filtering.
+The SoH shown is the value reported by the vehicle itself.
+These values depend on manufacturer implementation.
+
+[Screenshot placeholder: SoC and SoH indicators]
+
+## 2. Temperatures
+
+Battery pack temperature represents the overall thermal state of the high-voltage pack.
+Maximum cell temperature and minimum cell temperature represent the thermal range across cells.
+Indoor temperature reflects cabin conditions.
+Outdoor temperature reflects external ambient conditions measured by the vehicle.
+
+Temperature distribution affects both efficiency and battery aging.
+Differences between maximum and minimum cell temperatures may indicate load distribution effects.
+Environmental temperature strongly influences energy consumption.
+
+[Screenshot placeholder: Temperature section]
+
+## 3. Electrical Parameters
+
+Pack current represents instantaneous battery current flow.
+Positive values typically indicate discharge.
+Negative values indicate energy recovery through regeneration.
+Pack voltage represents instantaneous pack electrical potential.
+Maximum cell voltage and minimum cell voltage represent the cell-level voltage range.
+
+Voltage spread between maximum and minimum cell voltage provides insight into cell balancing.
+Current and voltage together determine instantaneous power demand.
+
+[Screenshot placeholder: Electrical parameters section]
+
+## Data Freshness and Update Behavior
+
+Values refresh while the vehicle is active and data is being collected.
+If the app is manually closed, no updates occur.
+Temporary communication instability may freeze values until a valid update is received.
+The system filters unrealistic or invalid responses before display.
+
+This panel is designed for monitoring the vehicle's live condition. It should be interpreted as instantaneous state, not long-term behavior. For behavioral analysis, refer to the Trips and Global Stats panels.

@@ -1,0 +1,33 @@
+---
+title: "Background Operation"
+description: "How Naubat runs in background on Android and iOS"
+---
+
+# Background Operation
+
+Naubat is designed for passive continuous monitoring with minimal user interaction while maintaining consistent Bluetooth communication and data collection behavior.
+
+## How It Works in Background
+
+The app scans for compatible Bluetooth Low Energy dongles and reconnects automatically when they become available.
+As operating conditions change, it transitions between Disconnected, Idle, and Collecting Data states.
+These transitions are handled automatically during normal use.
+
+## Android Behavior
+
+Android requires an active foreground notification for persistent background operation.
+Battery optimization settings can affect whether background processes remain active over time.
+Background reliability depends partly on each device manufacturer's system configuration.
+
+## iOS Behavior
+
+In the current version, background operation is supported under normal system conditions.
+If Bluetooth is toggled off and on, reopening the app may be required in some cases to restore expected behavior.
+Current version behavior may evolve in future updates.
+
+## Internet Connectivity
+
+Data is buffered locally when internet connectivity is unavailable.
+Up to 10 minutes of buffered data is retained.
+Beyond that limit, older buffered data is replaced using a FIFO strategy.
+Dashboard updates are delivered in batches at approximately one-minute intervals.

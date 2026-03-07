@@ -1,0 +1,254 @@
+---
+title: "Compatible Dongles"
+description: "What kind of OBD dongles work with Naubat, and which ones are the best fit"
+---
+
+# Compatible Dongles
+
+Naubat works with Bluetooth Low Energy, BLE, OBD-II dongles. It does not work with Classic Bluetooth adapters.
+
+This is the first requirement and the most important one. If a dongle is not BLE, the Naubat app is not compatible with it.
+
+## Minimum Compatibility Requirements
+
+A dongle is generally compatible with Naubat if all of the following are true:
+
+- It uses BLE, not Classic Bluetooth.
+- It behaves as a standard open OBD dongle and is not locked to a single app or product ecosystem.
+- It supports the ELM327 command model, or an equivalent implementation compatible with it.
+- It allows the app to exchange diagnostic messages reliably with the vehicle.
+
+Most consumer OBD dongles on the market are based on the ELM327 family, or on chipsets and firmware derived from that communication model.
+That includes simpler and more advanced implementations.
+Naubat is designed to work with this broad ELM327-compatible category.
+
+<Warning>
+Some dongles may appear to match the right hardware profile but are intentionally locked to a specific product, app, or vendor ecosystem. In those cases, Naubat is not compatible with them.
+</Warning>
+
+In practice, Naubat is compatible with open or "free" BLE dongles that expose standard diagnostic communication to third-party apps.
+
+## Compatible Does Not Always Mean Ideal
+
+Compatibility means the app can connect to the dongle and exchange messages with it, and the dongle can translate those messages into a format the vehicle understands.
+
+That is only the starting point.
+Among compatible dongles, some are clearly better suited to Naubat than others.
+The most suitable models behave more predictably in daily use and reduce edge cases around sleep state, reconnection, and vehicle activity detection.
+
+## Brands Commonly Seen
+
+The two families we most often highlight are:
+
+- **Vgate**
+- **Veepeak**
+
+Both brands include models that can work well with Naubat, although behavior still depends on the specific model and firmware implementation.
+
+## What Makes a Dongle Better for Naubat
+
+When comparing compatible dongles, we mainly look at three things:
+
+1. Throughput and responsiveness
+2. Auto-sleep and auto-wakeup behavior
+3. Voltage reading accuracy
+
+### 1. Throughput and Responsiveness
+
+A higher-performance dongle can move more bytes per second and usually handles request sequencing more cleanly.
+That is generally preferable.
+
+At the same time, this is not the most critical factor for Naubat.
+Naubat does not rely on aggressive high-rate polling.
+In normal operation, the app usually sends only a small number of diagnostic requests, commonly around two messages per second.
+
+In theory, almost any decent commercial dongle should be able to handle that load.
+In practice, real behavior depends on firmware quality, internal buffering, and how well the dongle handles rapid command sequencing.
+
+If you want to compare raw throughput across models, a good external reference is [Sidecar's scanning guide](https://sidecar.clutch.engineering/scanning/).
+It is well documented and provides a useful comparison of scanner behavior, including throughput figures for many commonly available adapters.
+We still treat throughput as only one part of the decision, not the only decision criterion.
+
+### 2. Auto-Sleep and Auto-Wakeup Behavior
+
+For Naubat, the ideal dongle behaves like this:
+
+- When the vehicle is turned off, the dongle enters sleep mode.
+- While sleeping, it is no longer reachable over Bluetooth.
+- When the vehicle becomes active again, the dongle wakes up and becomes available for the app to reconnect.
+
+This is the cleanest behavior because it matches the way users expect the app to behave around parked and active vehicles.
+
+Many dongles do not behave like this by default.
+One model that generally does, and that also satisfies the other important requirements, is the **vLinker FD+**.
+For that reason, it is currently our main recommendation.
+
+<Tip>
+Good auto-sleep and auto-wakeup behavior improves the everyday experience more than raw throughput does.
+</Tip>
+
+Some compatible commercial dongles expose programmable parameters that let you modify sleep behavior.
+This is commonly done through ELM327 programmable parameters, often called `PP`.
+
+Even after configuring sleep behavior, real-world behavior must still be verified.
+Some dongles enter a low-power state but remain visible over Bluetooth and wake up again as soon as the phone reconnects to them.
+That is not the same as becoming truly unavailable while the vehicle is off.
+
+#### What this means in real use
+
+- If the dongle does not fully disappear when the vehicle is off, the app may still connect when you are nearby.
+- This does **not** mean Naubat will start polling the vehicle continuously while it is parked.
+- Naubat has an additional safety layer and only starts extracting data when vehicle activity conditions are met.
+- In that scenario, the app may show a connected state even though no meaningful vehicle polling is taking place.
+
+This can still be slightly annoying if the vehicle is parked very close to home, especially in detached houses or garages within BLE range.
+If that becomes inconvenient, the simple workaround is to unplug the dongle or close the app when needed.
+
+### 3. Voltage Reading Accuracy
+
+Naubat continuously checks the dongle supply voltage using the standard ELM327 command `AT RV`.
+This value is used as one of the inputs for deciding whether the app should remain in `Idle` or move into `Collecting Data`.
+
+Ideally, the dongle reports a voltage very close to the actual 12 V battery line of the vehicle.
+Some dongles do this well.
+Others systematically report a lower value, often around 1 V below the real battery voltage.
+
+Examples reported by our tests and field experience:
+
+| Model | Voltage behavior |
+| --- | --- |
+| Veepeak BLE | Often reports around 1 V below real battery voltage |
+| Veepeak BLE+ | Often reports around 1 V below real battery voltage |
+| Vgate iCar Pro 2S | Usually close to real battery voltage |
+| vLinker FD+ | Usually close to real battery voltage |
+
+Differences of around 1 V are usually manageable in practice.
+Larger deviations can affect Naubat logic and can also indicate a dongle calibration issue that may influence other behavior.
+
+## Our Practical Recommendation
+
+If you want the simplest and most predictable experience, choose a BLE dongle that is:
+
+- Open to third-party apps
+- ELM327-compatible
+- Stable under repeated command sequencing
+- Able to sleep when the vehicle is off
+- Able to wake when the vehicle becomes active again
+- Reasonably accurate when reporting supply voltage
+
+Today, our preferred recommendation is **vLinker FD+**.
+
+Other BLE dongles from **Vgate** and **Veepeak** can also be compatible, but some models may require more compromise around sleep behavior or voltage calibration.
+
+## Advanced Configuration and Validation
+
+The sections below are optional.
+They are intended for users who want to inspect or tune dongle behavior more deeply.
+
+<AccordionGroup>
+  <Accordion title="Check programmable parameters">
+    Compatible dongles in this category expose programmable parameters.
+    Use the `AT PPS` command to inspect them.
+
+    ```text
+    > AT PPS
+    00:FF F 01:FF F 02:FF F 03:32 F
+    04:01 F 05:FF F 06:F1 F 07:09 F
+    08:FF F 09:00 F 0A:0A F 0B:FF F
+    0C:68 F 0D:0D F 0E:7A N 0F:D5 F
+    10:0D F 11:00 F 12:FF F 13:55 F
+    14:50 F 15:0A F 16:FF F 17:92 F
+    18:31 F 19:4F F 1A:0A F 1B:0A F
+    1C:03 F 1D:0F F 1E:4A F 1F:FF F
+    20:5D F 21:FF F 22:FF F 23:FF F
+    24:00 F 25:00 F 26:00 F 27:FF F
+    28:FF F 29:FF F 2A:3C F 2B:02 F
+    2C:01 N 2D:01 N 2E:80 F 2F:0A F
+    ```
+  </Accordion>
+
+  <Accordion title="Auto-sleep parameter PP 0E">
+    Programmable parameter `PP 0E` controls auto-sleep behavior.
+
+    For the compatible dongles we know, this is the relevant parameter for:
+
+    - Whether auto-sleep is enabled
+    - How long inactivity must last before sleep
+    - Whether low-power behavior is allowed
+
+    Two common values are:
+
+    | Value | Typical meaning |
+    | --- | --- |
+    | `FA` | Auto-sleep enabled, longer timeout behavior |
+    | `A2` | Auto-sleep enabled, shorter timeout behavior |
+
+    The exact bit-level interpretation depends on the firmware implementation, but this is the parameter that governs the sleep profile.
+  </Accordion>
+
+  <Accordion title="Set PP 0E manually">
+    A common configuration pattern is:
+
+    ```text
+    > ATPP0ESVXX
+    OK
+    ```
+
+    Replace `XX` with the desired value, for example `FA` or `A2`.
+
+    After changing the value, validate real behavior instead of assuming the change is fully applied:
+
+    - Turn the vehicle off
+    - Wait for the expected timeout
+    - Check whether the dongle truly disappears from BLE discovery
+    - Turn the vehicle on again and verify that it becomes reachable
+  </Accordion>
+
+  <Accordion title="Check voltage with AT RV">
+    To inspect reported supply voltage:
+
+    ```text
+    > AT RV
+    12.4V
+    ```
+
+    Compare this with a direct battery measurement using a multimeter.
+    If both values are close, the dongle is usually a better fit for Naubat's idle-versus-active detection logic.
+  </Accordion>
+
+  <Accordion title="Correct voltage calibration with AT CV">
+    If the dongle reports a clearly incorrect voltage, you can sometimes correct it with voltage calibration.
+
+    Recommended procedure:
+
+    1. Measure the real 12 V battery voltage with a multimeter.
+    2. Read the dongle voltage using `AT RV`.
+    3. If the difference is significant, use a serial terminal app that can send raw ELM327 commands.
+    4. Send `AT CV dddd`, where `dddd` represents the calibration target in `dd.dd` volts.
+
+    Example:
+
+    ```text
+    > AT CV 1260
+    OK
+    ```
+
+    A practical tool for this kind of testing is **Serial Bluetooth Terminal**, or any equivalent app that allows manual command entry.
+
+    <Warning>
+    Small voltage differences are usually acceptable. Larger errors can affect Naubat state detection and may also point to inconsistent dongle behavior more broadly.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+## Scope of Compatibility
+
+Naubat cannot guarantee compatibility for every BLE dongle on the market.
+Even within the ELM327-compatible category, implementation quality varies significantly.
+
+Our working position is:
+
+- Open BLE dongles based on the ELM327 model are generally compatible
+- Some models are better suited than others
+- Sleep behavior and voltage reporting matter more than marketing claims
+- Verified models remain the safest choice when reliability matters

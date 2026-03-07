@@ -1,0 +1,29 @@
+---
+title: "Funcionamiento en segundo plano"
+description: "Cómo funciona Naubat en segundo plano en Android e iOS"
+---
+
+# Funcionamiento en segundo plano
+
+Naubat está diseñado para monitorización continua y pasiva con mínima interacción del usuario.
+
+## Cómo funciona
+
+La app busca dongles BLE compatibles y se reconecta automáticamente cuando están disponibles.
+Según las condiciones, cambia entre `Disconnected`, `Idle` y `Collecting Data`.
+
+## Comportamiento en Android
+
+Android requiere una notificación activa de servicio en primer plano.
+Las políticas de optimización de batería del fabricante pueden afectar la fiabilidad en segundo plano.
+
+## Comportamiento en iOS
+
+En la versión actual, el funcionamiento en segundo plano está soportado en condiciones normales del sistema.
+Si se desactiva y activa Bluetooth, puede ser necesario reabrir la app en algunos casos.
+
+## Conectividad a internet
+
+Cuando no hay internet, los datos se almacenan temporalmente en local.
+Se conservan hasta 10 minutos.
+Los paneles se actualizan en lotes, aproximadamente cada minuto.

@@ -1,0 +1,77 @@
+---
+title: "Permisos de la app"
+description: "Permisos necesarios para BLE y operación fiable en segundo plano"
+---
+
+# Permisos de la app
+
+Para un funcionamiento estable entre app, dongle y vehículo, Naubat necesita los siguientes permisos en Android e iOS.
+
+## Permisos requeridos
+
+### Acceso a ubicación (incluida ubicación en segundo plano)
+
+Se requiere para comportamiento de escaneo BLE y contexto de viaje.
+La ubicación en segundo plano permite mantener la recogida de datos durante la conducción aunque la app no esté en primer plano.
+
+### Bluetooth
+
+Necesario para detectar dongles compatibles, establecer comunicación y mantener sesiones de diagnóstico.
+
+### Notificaciones
+
+En Android, la notificación de servicio en primer plano es necesaria para mantener la app activa en segundo plano.
+Muestra estados como `Disconnected`, `Idle` y `Collecting Data`.
+En iOS también se usa para mostrar estado de conexión y recogida.
+
+### Movimiento y actividad
+
+Se usa para detectar sesiones de conducción y mejorar la precisión del GPS durante los trayectos.
+
+### Optimización de batería
+
+Naubat debe funcionar sin restricciones de batería para evitar interrupciones en segundo plano.
+
+### Controles de inactividad de la app (Android)
+
+Desactiva:
+- `Gestionar la app si no se usa` en `Información de la app -> Permisos`.
+- `Pausar actividad de la app si no se usa` en la pantalla principal de `Información de la app`.
+
+## Ajustes específicos por fabricante (Android)
+
+<AccordionGroup>
+  <Accordion title="Samsung">
+    Ajustes recomendados:
+    - `Ajustes -> Apps -> Naubat -> Batería -> Sin restricciones`
+    - `Ajustes -> Cuidado batería y dispositivo -> Batería -> Límites de uso en segundo plano -> Apps que nunca duermen -> Añadir Naubat`
+    - `Ajustes -> Apps -> Naubat -> Datos móviles -> Permitir uso en segundo plano`
+  </Accordion>
+
+  <Accordion title="Xiaomi">
+    Ajustes recomendados:
+    - `Inicio automático`: activar en `Seguridad -> Gestionar apps -> Inicio automático`.
+    - `Ahorro de batería`: poner `Sin restricciones` en `Ajustes -> Batería -> Ahorro de batería por app -> Naubat`.
+    - `Uso de batería en segundo plano`: permitir uso sin restricciones en `Ajustes -> Apps -> Naubat -> Ahorro de batería`.
+    - `Bloquear app en recientes`: en recientes, pulsación larga sobre Naubat y bloquear.
+    - `Permisos`: permitir todos los permisos requeridos en `Ajustes -> Apps -> Permisos -> Naubat`.
+  </Accordion>
+
+  <Accordion title="Redmi">
+    Ajustes recomendados:
+    - `Inicio automático`: activar en `Seguridad -> Gestionar apps -> Inicio automático`.
+    - `Ahorro de batería`: poner `Sin restricciones` en `Ajustes -> Batería -> Ahorro de batería por app -> Naubat`.
+    - `Uso de batería en segundo plano`: permitir uso sin restricciones en `Ajustes -> Apps -> Naubat -> Ahorro de batería`.
+    - `Bloquear app en recientes`: en recientes, pulsación larga sobre Naubat y bloquear.
+    - `Permisos`: permitir todos los permisos requeridos en `Ajustes -> Apps -> Permisos -> Naubat`.
+  </Accordion>
+</AccordionGroup>
+
+Iremos añadiendo y actualizando más marcas progresivamente.
+
+Recomendación adicional por modelo de móvil:
+[https://dontkillmyapp.com/](https://dontkillmyapp.com/)
+
+## Nota de transparencia
+
+> Si la app se cierra manualmente, la recogida de datos se detendrá hasta volver a abrirla.

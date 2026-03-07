@@ -1,0 +1,34 @@
+---
+title: "Datos recogidos"
+description: "Qué datos se recogen y cuándo se transmiten"
+---
+
+# Datos recogidos
+
+Naubat recoge y transmite datos solo durante el estado `Collecting Data`. Esta página explica qué se recoge, cuándo se envía y qué no se recoge.
+
+## Condiciones de recogida y subida
+
+Los datos se suben a servidores de Naubat únicamente cuando la app está en `Collecting Data`.
+Si la app está en `Disconnected` o `Idle`, no se suben datos.
+En esos estados no hay comunicación activa con el vehículo.
+
+## Transmisión de datos
+
+Los datos recogidos se transmiten al backend mediante conexiones HTTP cifradas.
+La transmisión se limita a la información necesaria para analítica de viaje y batería.
+
+## Señales del móvil
+
+La app recoge posición GPS y señales de acelerómetro del teléfono.
+Estas señales se usan para calcular y validar métricas de viaje.
+
+## Señales de diagnóstico del vehículo
+
+La app recoge parámetros de diagnóstico en bruto del vehículo.
+Estas señales se transmiten sin interpretación de alto nivel en el momento de la recogida.
+Los valores procesados se muestran posteriormente en paneles como `Latest Readings`.
+
+## Datos personales
+
+Naubat no recoge datos personales de conducción identificables.
