@@ -57,6 +57,11 @@
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
+  "seo": {
+    "metatags": {
+      "canonical": "https://docs.naubat.com"
+    }
+  },
   "navbar": {
     "links": [
       {
