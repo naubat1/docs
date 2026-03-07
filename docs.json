@@ -3,11 +3,10 @@
   "theme": "mint",
   "name": "Naubat Docs",
   "colors": {
-    "primary": "#000000",
-    "light": "#E9F731",
-    "dark": "#000000"
-  }
-  ,
+    "primary": "#16A34A",
+    "light": "#07C983",
+    "dark": "#15803D"
+  },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
@@ -15,43 +14,33 @@
         "tab": "Documentation",
         "groups": [
           {
-            "group": "Introduction",
+            "group": "Introducción",
             "pages": [
               "index"
             ]
           },
           {
-            "group": "How it works",
+            "group": "Cómo funciona",
             "pages": [
               "how-it-works/overview",
               "how-it-works/app-and-dongle",
-              "how-it-works/data-collected",
-              "how-it-works/privacy-and-independence"
+              "how-it-works/data-and-privacy"
             ]
           },
           {
-            "group": "Getting started",
+            "group": "Primeros pasos",
             "pages": [
-              "getting-started/app-installation",
-              "getting-started/connecting-the-dongle",
-              "getting-started/app-permissions"
+              "getting-started/installation",
+              "getting-started/connect-dongle",
+              "getting-started/app-permissions",
+              "getting-started/background-usage"
             ]
           },
           {
-            "group": "Dashboard",
+            "group": "Compatibilidad",
             "pages": [
-              "dashboard/overview",
-              "dashboard/latest-readings",
-              "dashboard/trips",
-              "dashboard/global-stats"
-            ]
-          },
-          {
-            "group": "Compatibility",
-            "pages": [
-              "compatibility/vehicle-types",
-              "compatibility/compatible-dongles",
-              "compatibility/known-limitations"
+              "compatibility/vehicles",
+              "compatibility/dongles"
             ]
           },
           {
@@ -69,13 +58,14 @@
     "dark": "/logo/dark.svg"
   },
   "navbar": {
-    "links": [],
-    "primary": {
-      "type": "button",
-      "label": "Get Started",
-      "href": "/getting-started/app-installation"
-    }
-  },
+    "links": [
+      {
+        "label": "Naubat",
+        "href": "https://naubat.com"
+      }
+    ]
+  }
+  ,
   "contextual": {
     "options": [
      "copy",
@@ -90,7 +80,9 @@
   },
   "footer": {
     "socials": {
-      "github": "https://github.com"
+      "x": "https://x.com/mintlify",
+      "github": "https://github.com/mintlify",
+      "linkedin": "https://linkedin.com/company/mintlify"
     }
   }
 }
