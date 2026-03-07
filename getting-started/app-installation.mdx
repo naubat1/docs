@@ -1,0 +1,59 @@
+---
+title: "App Installation"
+description: "Install Naubat and complete the first setup steps"
+---
+
+# App Installation
+
+Naubat is available on Android and iOS. Installation is done from each platform store. After installation, the first important step is account access and initial setup inside the app.
+
+## First Launch (All Platforms)
+
+When you open the app for the first time, create an account or log in with your existing Naubat account.
+If you already created an account when activating your Naubat plan, use that same account.
+Authentication is handled through an external AWS Cognito authentication flow.
+
+After login, select your vehicle and complete the required setup fields.
+Then continue to dongle selection.
+See [Connecting the Dongle](/getting-started/connecting-the-dongle).
+
+The videos below show a full flow where the dongle is already connected to the vehicle OBD port.
+You do not need to complete the full flow in one session.
+Permissions and vehicle selection can be completed right after installation, and the first dongle connection can be done later when you are in the vehicle and the dongle is plugged in.
+
+## Android First Steps
+
+Install the app from Google Play, open it, and complete login and vehicle setup.
+Then select your dongle from the in-app connection screen.
+
+<iframe
+  width="100%"
+  height="420"
+  src="https://www.youtube.com/embed/UoJoFFNp7zU"
+  title="Naubat Android setup"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+/>
+
+Android video link: https://youtube.com/shorts/UoJoFFNp7zU?feature=share
+
+## iOS First Steps
+
+Install the app from the App Store, open it, and complete login and vehicle setup.
+Then select your dongle from the in-app connection screen.
+
+iOS setup video link placeholder: https://www.youtube.com/watch?v=IOS_VIDEO_ID
+
+## Android Permissions by Manufacturer
+
+Some Android manufacturers apply stricter background policies.
+Review [App Permissions](/getting-started/app-permissions) for manufacturer-specific background and battery optimization guidance.
+
+## Initial Setup Validation
+
+For the first validation, it is important to leave the app running in Collecting Data and start in a location with internet connectivity.
+Then check the dashboard to confirm data is uploading and visible across panels.
+You should see updates in Latest Readings and parameter charts in the Trips panel.
+Note that a trip may not appear immediately after the first drive: the first trip record can take up to about 5 minutes after the drive has finished.
+Even if the trip is not yet visible in the trips table, vehicle parameter traces should already be visible in the lower charts of the Trips panel, such as voltage, current, and temperature.

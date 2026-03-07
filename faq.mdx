@@ -1,0 +1,150 @@
+---
+title: "Frequently Asked Questions"
+description: "Practical questions about Naubat operation, accuracy, and limitations"
+---
+
+# Frequently Asked Questions
+
+## App Operation
+
+### Does the app need to be open to record trips?
+
+The app must remain running in background to record trips.
+If it is manually closed, no trips are recorded.
+It is designed to operate passively with minimal interaction.
+
+### Do I need to open the app before every drive?
+
+No, not if the app is already running in background.
+Some Android manufacturers apply background restrictions that can reduce reliability.
+Opening the app occasionally can help restore stable operation.
+
+### Why is there a persistent notification on Android?
+
+Android requires a persistent notification for stable background operation.
+It shows the current state: Disconnected, Idle, or Collecting Data.
+This does not imply excessive battery use.
+
+### How can I verify that the app is working correctly?
+
+First, check the dashboard: trips should be recorded and the trip charts should show parameter-versus-time traces.
+It is not enough to see only a trip entry; you should also see signal curves in that trip.
+If the trip appears but charts are empty, data upload is not completing correctly.
+
+On the next drive, open the app in the vehicle and confirm the state is Collecting Data.
+If it does not reach Collecting Data, unplug the dongle, restart the app, and select the dongle again.
+
+As an additional check, many dongles show high-frequency LED blinking while app-dongle communication is active.
+
+## Dongles
+
+### What type of dongle do I need?
+
+A Bluetooth Low Energy dongle is required.
+ELM327-compatible chipsets are commonly used.
+Firmware stability is important for reliable communication.
+
+### Will any cheap dongle work?
+
+Some generic adapters respond inconsistently.
+Unstable firmware can cause data gaps.
+Using verified models is recommended.
+
+### Does the dongle drain my 12V battery?
+
+No. In normal use, a compatible BLE dongle does not create a meaningful 12V battery drain risk.
+
+Typical dongle current is in the tens of milliamps. For a 60Ah 12V battery (common in small cars), even a continuous 30mA load corresponds to about 0.72Ah per day (0.03A x 24h), around 1.2% of nominal capacity per day.
+This is a conservative calculation that does not account for any vehicle use during that time.
+
+Many dongles also enter auto-sleep, which reduces real standby impact further.
+Naubat validation tests have not shown relevant 12V battery issues under normal operation.
+
+For long periods without using the vehicle, unplugging the dongle remains the recommended practice, just as with any non-essential electrical consumer.
+
+### Is it safe for my vehicle?
+
+Naubat sends read-only diagnostic requests.
+No coding or configuration changes are performed.
+No firmware flashing is performed.
+
+### Can I use Naubat and another app at the same time with one dongle?
+
+No. This setup is not supported for reliable operation.
+Even if Naubat connects through the BLE profile and another app connects through Classic Bluetooth, diagnostic extraction quality is usually not acceptable in real use.
+
+### Can I use an OBD splitter with two dongles, one for Naubat and one for another app?
+
+It can work in some cases, but it is not guaranteed and not recommended.
+With two dongles on a splitter, request-response timing on the diagnostic CAN path is not synchronized between tools, which can reduce reliability.
+
+## Connectivity
+
+### Why did my trip split into two parts?
+
+If there is a long interruption in data upload, one driving session may be shown as two trips.
+Data collection can still continue locally during temporary connectivity issues.
+Trip segmentation is applied when data is presented.
+
+### I left the car, but the app still shows connected. Is this normal?
+
+Yes. BLE range can be strong, and disconnection may require moving at least around 25 meters away from the vehicle.
+If the vehicle is at rest, the app should move to Idle even if connection remains.
+In Idle, no vehicle polling is performed and no data is uploaded; only dongle-state checks continue.
+If it does not enter Idle, the dongle may still report vehicle 12V supply above active threshold, which can happen for example while charging.
+Some models also keep high-voltage related systems active longer than others after parking.
+For example, Kia models often transition faster, while some VW models can remain in this intermediate behavior for several minutes.
+
+### Why does my car alarm trigger after I lock the vehicle?
+
+This issue has been identified on some newer MY25 vehicles, including models from brands such as VW and MG.
+It is related to an additional anti-theft protection behavior that can trigger the alarm when diagnostic communication reaches certain ECUs while the vehicle is locked.
+It is not caused simply by having a dongle plugged into the OBD port.
+
+To reduce this behavior, app-side measures are being applied so that, for affected brands, communication is maintained only when the vehicle is on.
+Dongles with fast auto-sleep and auto-wake behavior can also mitigate this issue, which is part of the Naubat dongle configuration approach.
+
+If it still occurs occasionally, the current practical workaround is to unplug the dongle at the end of the trip and reconnect it manually before the next trip.
+
+### Why are final trip data points missing?
+
+If a trip ends without internet coverage, the final segment can be missing from uploaded data.
+The app can continue operating without internet, but pending data is uploaded only after connectivity returns while the app is again in Collecting Data.
+If connectivity returns after you have already moved away from the vehicle and the app is Disconnected, that final offline segment can be dropped.
+
+## Data and Accuracy
+
+### Why are some values not updating?
+
+The vehicle may be idle.
+The app may be disconnected.
+Temporary communication instability can delay updates.
+Values update only when valid responses are received.
+
+### Why does my consumption look different from the car display?
+
+Calculation methodologies may differ.
+Distance source can differ, for example GPS versus odometer.
+Manufacturers may apply their own rounding and filtering.
+Naubat applies structured validation rules before presenting values.
+
+### Why is a trip marked as unreliable?
+
+This can result from data continuity issues, communication instability, or missing critical signals.
+Trips marked as unreliable are excluded from aggregated statistics.
+
+### Why don’t I see older trips?
+
+Trip history depends on subscription level.
+Only trips recorded while the app was active are stored.
+
+### Can I download my trip data locally?
+
+Yes. Trip data can be exported as CSV from the Trips panel.
+
+### Where is my data hosted and how is it protected?
+
+Data is stored in databases hosted on AWS.
+Access is protected with strict security controls and AWS security layers.
+
+This FAQ is updated continuously as new usage scenarios are identified.
