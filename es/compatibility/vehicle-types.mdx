@@ -1,0 +1,31 @@
+---
+title: "Compatibilidad de vehículos"
+description: "Categorías de vehículos soportadas y requisitos de interfaz"
+---
+
+# Compatibilidad de vehículos
+
+Naubat está diseñado para vehículos electrificados que exponen datos de diagnóstico mediante interfaces accesibles.
+
+## Tipos soportados
+
+Naubat soporta BEV, PHEV e híbridos cuando las señales de batería necesarias están disponibles.
+Vehículos de combustión sin batería de alto voltaje no están soportados.
+
+## Variabilidad por modelo
+
+La disponibilidad de datos varía por fabricante y modelo.
+La estructura de señales puede cambiar entre marcas.
+
+## Requisitos de interfaz de diagnóstico
+
+Se requiere puerto físico OBD-II estándar.
+El vehículo debe permitir acceso a datos de diagnóstico por esa interfaz.
+
+## Mejora continua
+
+La lista de compatibilidad evoluciona con nuevas validaciones.
+
+Estados de compatibilidad:
+- `Beta`: operativo, con parámetros aún en validación.
+- `Totalmente soportado`: validación completa de señales requeridas.

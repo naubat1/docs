@@ -1,0 +1,95 @@
+---
+title: "Trips"
+description: "Session-level analysis and metric traceability"
+---
+
+# Trips
+
+The Trips panel provides structured analysis of each driving session recorded while Naubat was actively collecting data. Trips are segmented from vehicle activity and data continuity so session metrics remain traceable and technically interpretable.
+
+<Image src="/images/dashboard/trips-overview.png" alt="Trips panel overview" />
+
+## What Is a Trip?
+
+A trip corresponds to a continuous period of vehicle activity while the app was running in background.
+Charging and driving phases are identified automatically from signal behavior.
+If there is a long upload interruption, one physical session can be presented as two trips.
+
+Collection can continue locally during connectivity issues, but presentation-level segmentation may still occur when continuity criteria are not met.
+
+## Trip Active Phases and Power Masks
+
+Naubat first detects charging phases using sustained negative battery power, minimum duration criteria, and validation through SoC increase.
+Charging blocks that are close in time can be merged into a single charging phase.
+
+For electrical activity, battery power in absolute value is smoothed and classified into:
+
+- `Electric Strong`
+- `Electric Support`
+- `No Electric Activity`
+
+For hybrid vehicles, `No Electric Activity` is disambiguated with odometer evidence first and GPS as fallback to separate:
+
+- `Thermal Drive Likely`
+- `Idle`
+
+If evidence is insufficient, the block is kept as ambiguous.
+For BEV vehicles, thermal driving is not assumed; equivalent blocks are treated as inactivity.
+
+In functional terms, trip active phases include charging, strong electric driving, electric support driving, and thermal-drive-likely phases for hybrids.
+
+## Energy and Consumption Methods
+
+Two methods are used to estimate trip energy:
+
+- `Integration method`: integrates power over time only on valid intervals, excluding long temporal gaps.
+- `Counter method`: uses increments from cumulative charged and discharged energy counters, filtering resets and noise.
+
+Both methods produce net energy and regenerated energy estimates.
+Net energy is treated as energy out minus energy in for the analyzed trip context.
+
+Final method selection follows explicit criteria:
+
+- Counter is preferred by default when available.
+- Integration can override in low-energy trips when temporal quality is high.
+
+## Distance Estimation and Source Selection
+
+Trip distance is computed from GPS and odometer when both are available.
+Source selection follows deterministic rules:
+
+- If both are consistent, GPS can be used for higher spatial resolution.
+- If discrepancy is relevant, odometer is used as reference.
+- If only one source exists, that source is used.
+- If neither source is valid, distance and dependent metrics are marked not reliable or unavailable.
+
+The selected source is exposed as `distanceSourceUsed`.
+GPS quality is evaluated and included in reliability classification.
+
+## Key Metric Definitions
+
+### Electrical consumption
+
+Electrical consumption is based on trip net energy during non-charging periods, defined as energy leaving the battery minus energy entering the battery, divided by the trip's selected valid distance.
+
+### Regeneration ratio
+
+Regeneration ratio is defined as energy entering the battery through regeneration divided by total energy leaving the battery during electrical activity, equivalent to `E_in / E_out`.
+
+## Trip Map and Signal Evolution
+
+At the bottom of each trip, a map shows the route.
+Route color represents instantaneous battery power demand.
+Red segments indicate higher battery draw, while cooler colors indicate lower demand or energy recovery.
+
+<Image src="/images/dashboard/trip-map-power.png" alt="Trip map with power-based color coding" />
+
+Time-series plots show key battery signals across the trip timeline, enabling correlation between speed, power demand, SoC variation, and temperature evolution.
+
+<Image src="/images/dashboard/trip-timeseries.png" alt="Battery signals over time during trip" />
+
+## Data Quality and Limitations
+
+Trips can be flagged or excluded from aggregated statistics when continuity, signal stability, or communication quality are not sufficient.
+If the app is manually closed, trips are not recorded.
+Vehicle-specific implementation affects signal availability and metric confidence.

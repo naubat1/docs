@@ -1,0 +1,37 @@
+---
+title: "Conectar el dongle"
+description: "Cómo Naubat detecta y conecta dongles BLE compatibles"
+---
+
+# Conectar el dongle
+
+Naubat detecta automáticamente dongles BLE compatibles en rango y establece comunicación cuando se cumplen las condiciones operativas.
+
+Antes de continuar, asegúrate de tener un dongle compatible. Ver [Dongles compatibles](/es/compatibility/compatible-dongles).
+
+## Estados operativos
+
+### Disconnected
+
+- Dongle fuera de rango.
+- App en segundo plano.
+- Sin interacción con el vehículo.
+
+### Idle
+
+- Dongle detectado.
+- Vehículo en reposo.
+- Sin solicitudes activas.
+
+### Connected
+
+- Teléfono conectado al dongle.
+- Aún no hay intercambio activo de diagnóstico.
+
+### Collecting Data
+
+- Vehículo activo.
+- Solicitudes estructuradas continuas.
+- Monitorización de señales de batería y viaje.
+
+`Disconnected -> Idle -> Connected -> Collecting Data`

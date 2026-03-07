@@ -1,0 +1,44 @@
+---
+title: "App y dongle"
+description: "Cómo Naubat se comunica con el vehículo mediante un dongle BLE OBD-II"
+---
+
+# App y dongle
+
+Naubat se comunica directamente con el sistema de diagnóstico del vehículo a través de un dongle OBD-II Bluetooth Low Energy. El modelo de comunicación sigue procedimientos estándar del sector automotriz.
+
+## Comunicación de diagnóstico
+
+Los vehículos modernos incorporan múltiples ECUs (Electronic Control Units).
+Estas ECUs intercambian información a través de redes internas del vehículo.
+Los estándares de diagnóstico automotriz permiten acceso estructurado de lectura a parámetros del vehículo.
+Naubat usa servicios estandarizados, incluyendo UDS (Unified Diagnostic Services).
+
+Naubat realiza solicitudes de diagnóstico solo de lectura.
+No modifica parámetros del vehículo.
+No realiza codificación, flasheo ni cambios de configuración.
+
+## ¿Qué es un dongle OBD?
+
+El puerto OBD-II proporciona acceso físico estandarizado al diagnóstico.
+El dongle Bluetooth actúa como puente entre smartphone y vehículo.
+Muchos dongles de consumo se basan en chipsets compatibles con ELM327.
+
+La estabilidad de conexión y la calidad de firmware afectan a la fiabilidad.
+Naubat requiere dongles BLE para operación estable en segundo plano.
+
+## Modelo de comunicación
+
+La app detecta el dongle automáticamente cuando está en rango.
+Cuando el vehículo está activo, se inician solicitudes de diagnóstico estructuradas.
+La recogida de datos continúa mientras el vehículo está operativo.
+Cuando el vehículo vuelve a reposo, la comunicación activa se pausa.
+
+## Consumo energético e impacto en batería de 12V
+
+La mayoría de dongles consumen solo decenas de miliamperios.
+Muchos incluyen modo auto-sleep o bajo consumo.
+Naubat comunica únicamente cuando es necesario para la recogida de datos.
+
+El sistema está diseñado para no causar un drenaje significativo de la batería de 12V en uso normal.
+Para periodos largos de inactividad, se recomienda desconectar el dongle como precaución.

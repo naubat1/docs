@@ -1,0 +1,54 @@
+---
+title: "Cómo funciona"
+description: "Flujo de datos de alto nivel desde diagnóstico del vehículo hasta analítica"
+---
+
+# Cómo funciona
+
+Naubat recopila datos de diagnóstico estructurados del vehículo mediante una conexión Bluetooth Low Energy. La app móvil actúa como pasarela entre el vehículo y la plataforma cloud, donde se procesan señales y se generan métricas.
+
+## Paso 1 — Conexión
+
+Se conecta un dongle de diagnóstico Bluetooth Low Energy al vehículo.
+La app móvil realiza el emparejamiento seguro con el dongle.
+Tras el emparejamiento, la app establece una sesión de comunicación para intercambio de diagnóstico.
+
+## Paso 2 — Solicitudes de datos estructurados
+
+La app se comunica con las unidades de control del vehículo mediante el protocolo UDS.
+Las solicitudes se envían con una cadencia controlada.
+Las ECUs relevantes devuelven respuestas de datos estructurados.
+La frecuencia de muestreo se mantiene por debajo de cargas típicas del bus CAN, manteniendo calidad de señal suficiente para analítica de batería.
+
+## Paso 3 — Procesamiento de señal
+
+Las señales recogidas se envían al cloud para su procesamiento.
+Las señales en bruto se normalizan a unidades y formatos consistentes.
+Se aplican validaciones de integridad para detectar valores incompletos, inconsistentes o fuera de rango.
+Las muestras inválidas se filtran antes del cálculo de métricas.
+
+## Paso 4 — Generación de métricas
+
+Las métricas se calculan en backend a partir de señales validadas.
+Se derivan indicadores de viaje y energía.
+La analítica de batería se calcula en servidor usando datos históricos y de sesión.
+
+## Flujo de datos conceptual
+
+### 1) Flujo de conexión
+
+`App móvil <-> Dongle BLE <-> ECUs del vehículo`
+
+`App móvil -> Backend`
+
+La app mantiene el enlace bidireccional de diagnóstico con dongle y ECUs, y en paralelo mantiene conectividad con backend.
+
+### 2) Flujo de datos
+
+`App móvil -> solicitudes UDS -> ECUs del vehículo`
+
+`ECUs del vehículo -> respuestas UDS -> App móvil`
+
+`App móvil -> ingesta en backend -> traducción a valores legibles -> procesamiento de métricas avanzadas`
+
+Las respuestas de diagnóstico en bruto se envían al backend, donde se traducen a valores interpretables y se usan para analítica avanzada.

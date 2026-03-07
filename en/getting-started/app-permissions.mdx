@@ -1,0 +1,89 @@
+---
+title: "App Permissions"
+description: "Permissions required for reliable BLE and background operation"
+---
+
+# App Permissions
+
+Certain permissions are required to maintain reliable background operation and Bluetooth communication between the app, dongle, and vehicle.
+
+## Required Permissions
+
+Naubat requires the following permissions on both Android and iOS for reliable background operation:
+
+### Location Access (including background location)
+
+Location permission is required to support BLE scanning behavior and trip context.
+Background location access is required so data collection can continue reliably while driving with the app in the background.
+
+### Bluetooth
+
+Bluetooth permission is required to discover compatible dongles, establish communication, and maintain diagnostic sessions during normal operation.
+
+### Notifications
+
+On Android, a foreground service notification is required when persistent background activity is active.
+This requirement allows the system to keep the process available for reliable operation.
+The notification indicates operational status such as Disconnected, Idle, or Collecting Data.
+On iOS, notifications are also used to expose connection and collection status clearly to the user.
+
+### Motion and Activity
+
+Motion and activity permission is used to detect driving sessions and improve GPS behavior during active trips.
+This helps increase trip detection reliability and location accuracy while driving.
+
+### Battery Optimization
+
+Naubat should run without battery restrictions to avoid interruption while working in the background.
+On Android, this means setting Naubat to unrestricted battery usage and excluding it from aggressive battery optimization policies.
+
+### App Inactivity Controls (Android)
+
+On Android, also disable inactivity controls that can stop background behavior:
+- Turn off `Manage app if unused` in `App info -> App permissions` (wording may vary by device).
+- Turn off `Pause app activity if unused` in the main `App info` screen.
+
+## Manufacturer-Specific Settings (Android)
+
+Some Android manufacturers apply aggressive battery optimization policies.
+Users may need to disable battery optimization for Naubat to improve background reliability.
+Platform guidance by manufacturer will be expanded progressively in the documentation.
+
+<AccordionGroup>
+  <Accordion title="Samsung">
+    Recommended checks:
+    - `Settings -> Apps -> Naubat -> Battery -> Unrestricted`
+    - `Settings -> Battery and device care -> Battery -> Background usage limits -> Never sleeping apps -> Add Naubat`
+    - `Settings -> Apps -> Naubat -> Mobile data -> Allow background data usage`
+
+    Optional video walkthrough:
+    - [Android setup video](https://youtube.com/shorts/UoJoFFNp7zU?feature=share)
+  </Accordion>
+
+  <Accordion title="Xiaomi">
+    Recommended checks:
+    - `Autostart`: enable in `Security -> Manage apps -> Autostart`.
+    - `Battery Saver`: set to `No restrictions` in `Settings -> Battery -> App Battery Saver -> Naubat`.
+    - `Background battery usage`: allow unrestricted background usage in `Settings -> Apps -> Naubat -> Battery Saver`.
+    - `Lock app in recents`: open recent apps, long-press Naubat, and lock it to avoid memory cleanup.
+    - `Permissions`: allow all required Naubat permissions in `Settings -> Apps -> Permissions -> Naubat`.
+  </Accordion>
+
+  <Accordion title="Redmi">
+    Recommended checks:
+    - `Autostart`: enable in `Security -> Manage apps -> Autostart`.
+    - `Battery Saver`: set to `No restrictions` in `Settings -> Battery -> App Battery Saver -> Naubat`.
+    - `Background battery usage`: allow unrestricted background usage in `Settings -> Apps -> Naubat -> Battery Saver`.
+    - `Lock app in recents`: open recent apps, long-press Naubat, and lock it to avoid memory cleanup.
+    - `Permissions`: allow all required Naubat permissions in `Settings -> Apps -> Permissions -> Naubat`.
+  </Accordion>
+</AccordionGroup>
+
+We will continue adding and updating manufacturer-specific guidance over time.
+
+For device-specific background behavior and additional permission tips, we also recommend:
+[https://dontkillmyapp.com/](https://dontkillmyapp.com/)
+
+## Transparency Note
+
+> If the application is manually closed, data collection will stop until it is opened again.

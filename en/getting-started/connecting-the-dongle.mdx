@@ -1,0 +1,47 @@
+---
+title: "Connecting the Dongle"
+description: "How Naubat detects and connects to compatible BLE dongles"
+---
+
+# Connecting the Dongle
+
+Naubat automatically detects compatible Bluetooth Low Energy diagnostic dongles that are within range and establishes communication when normal operating conditions are met.
+
+Before continuing, make sure you already have a compatible dongle. See [Compatible Dongles](/compatibility/compatible-dongles).
+The dongle is connected to the vehicle OBD-II port, which uses a standardized 16-pin trapezoidal connector shape.
+This port is usually located below the steering wheel on the driver side, although location varies by model.
+If you do not find it immediately, an online search for your specific vehicle model usually provides the exact location.
+
+Image placeholder: OBD-II port shape and typical driver-side location.
+
+After the dongle is connected, its BLE name becomes visible in the app connection screen.
+Select the dongle from the list to start the app-to-dongle connection sequence.
+When vehicle conditions are active and communication starts, the app transitions to Collecting Data.
+
+## Operational States
+
+### Disconnected
+
+- Dongle not in range.
+- App running in background.
+- No vehicle interaction.
+
+### Idle
+
+- Dongle detected.
+- Vehicle in rest state.
+- No active data requests.
+
+### Connected
+
+- Phone connected to the dongle.
+- No active diagnostic message exchange yet.
+- Intermediate state before Collecting Data.
+
+### Collecting Data
+
+- Vehicle active.
+- Continuous structured data requests.
+- Battery and trip signals monitored.
+
+`Disconnected -> Idle -> Connected -> Collecting Data`

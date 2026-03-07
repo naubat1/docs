@@ -1,0 +1,36 @@
+---
+title: "Vehicle Compatibility"
+description: "Supported vehicle categories and interface requirements"
+---
+
+# Vehicle Compatibility
+
+Naubat is designed for electrified vehicles that expose diagnostic data through accessible vehicle interfaces. Compatibility depends on both vehicle-side implementation and diagnostic access behavior.
+
+## Supported Vehicle Types
+
+Naubat supports Battery Electric Vehicles (BEV), Plug-in Hybrid Electric Vehicles (PHEV), and hybrid vehicles where required battery-related signals are available.
+Internal combustion vehicles without high-voltage battery systems are not supported.
+
+## Model Variability
+
+Data availability varies by manufacturer and model.
+Signal structure and naming can differ between brands and control unit implementations.
+Sampling capability depends on how each vehicle exposes and serves diagnostic data.
+
+## Diagnostic Interface Requirements
+
+A standard OBD-II physical port is required.
+The vehicle must allow diagnostic data access through that interface.
+Some models may restrict access to certain control units or signals.
+
+## Continuous Improvement
+
+The compatibility list is published on the Naubat website and evolves over time as additional vehicles are tested and validated.
+
+Vehicle status is grouped into two categories:
+
+- Beta: the model is operational, but some parameters are still pending or under reliability validation with real users.
+- Fully Supported: the model has completed validation for the required signal set.
+
+Validation is performed by comparing collected values against professional diagnostic tools and by confirming behavior with real users in real driving sessions.

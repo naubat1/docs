@@ -1,0 +1,34 @@
+---
+title: "Data Collected"
+description: "What data is collected and when it is transmitted"
+---
+
+# Data Collected
+
+Naubat collects and transmits data only during the Collecting Data state. This page explains what is collected, when it is sent, and what is not collected.
+
+## Collection and Upload Conditions
+
+Data is uploaded to Naubat servers only when the app is in Collecting Data.
+When the app is in Disconnected or Idle state, no data is uploaded.
+In Disconnected or Idle state, the app does not communicate with the vehicle.
+
+## Data Transmission
+
+Collected data is transmitted to the backend over encrypted HTTP connections.
+Transmission is limited to the data required for trip and battery analytics.
+
+## Mobile Device Signals
+
+The app collects GPS position and accelerometer signals from the phone.
+These signals are used to compute and validate trip-level metrics.
+
+## Vehicle Diagnostic Signals
+
+The app collects raw vehicle diagnostic parameters from the vehicle.
+These signals are transmitted without prior high-level interpretation at collection time.
+Processed values based on these signals are later available in panels such as Latest Readings.
+
+## Personal Data
+
+Naubat does not collect personal data.
