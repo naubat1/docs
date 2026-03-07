@@ -14,33 +14,36 @@
         "tab": "Documentation",
         "groups": [
           {
-            "group": "Introducción",
+            "group": "Introduction",
             "pages": [
               "index"
             ]
           },
           {
-            "group": "Cómo funciona",
+            "group": "How it works",
             "pages": [
               "how-it-works/overview",
               "how-it-works/app-and-dongle",
-              "how-it-works/data-and-privacy"
+              "how-it-works/data-collected",
+              "how-it-works/privacy-and-independence"
             ]
           },
           {
-            "group": "Primeros pasos",
+            "group": "Getting started",
             "pages": [
-              "getting-started/installation",
-              "getting-started/connect-dongle",
+              "getting-started/app-installation",
+              "getting-started/connecting-the-dongle",
               "getting-started/app-permissions",
-              "getting-started/background-usage"
+              "getting-started/background-usage",
+              "getting-started/first-data-and-timing"
             ]
           },
           {
-            "group": "Compatibilidad",
+            "group": "Compatibility",
             "pages": [
-              "compatibility/vehicles",
-              "compatibility/dongles"
+              "compatibility/vehicle-types",
+              "compatibility/compatible-dongles",
+              "compatibility/known-limitations"
             ]
           },
           {

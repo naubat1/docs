@@ -35,4 +35,20 @@ Battery-related analytics are computed server-side from structured historical an
 
 ## Conceptual Data Flow
 
-`Phone App (Gateway) -> BLE Dongle -> Vehicle ECU -> UDS Signals -> Cloud Processing -> Backend Metrics`
+### 1) Connection Flow
+
+`Mobile App <-> BLE Dongle <-> Vehicle ECUs`
+
+`Mobile App -> Backend`
+
+The mobile app maintains the bidirectional diagnostic link with the dongle and ECUs, and separately maintains upstream connectivity to the backend platform.
+
+### 2) Data Flow
+
+`Mobile App -> UDS requests -> Vehicle ECUs`
+
+`Vehicle ECUs -> UDS responses -> Mobile App`
+
+`Mobile App -> Backend ingestion -> Signal translation to readable values -> Advanced metric processing`
+
+Raw diagnostic responses are sent to the backend, where they are translated into human-readable values and then used to compute higher-level analytics and metrics.
