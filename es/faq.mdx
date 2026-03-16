@@ -7,63 +7,144 @@ description: "Preguntas prácticas sobre funcionamiento, precisión y limitacion
 
 ## Funcionamiento de la app
 
-### ¿La app debe estar abierta para registrar viajes?
+### ¿La app necesita estar abierta para registrar viajes?
 
-La app debe permanecer ejecutándose en segundo plano.
-Si se cierra manualmente, no se registran viajes.
+La app debe permanecer en ejecución en segundo plano para registrar viajes.
+Si se cierra manualmente, no se registra ningún viaje.
+Está diseñada para operar de forma pasiva con mínima interacción.
 
 ### ¿Tengo que abrir la app antes de cada trayecto?
 
-No, si ya está activa en segundo plano.
-En algunos Android con restricciones agresivas puede ayudar abrirla de vez en cuando.
+No, si la app ya está ejecutándose en segundo plano.
+Algunos fabricantes Android aplican restricciones de segundo plano que pueden reducir la fiabilidad.
+Abrir la app ocasionalmente puede ayudar a restaurar una operación estable.
 
 ### ¿Por qué hay una notificación persistente en Android?
 
-Android requiere una notificación de servicio en primer plano para funcionamiento estable en segundo plano.
-Muestra el estado: `Disconnected`, `Idle` o `Collecting Data`.
+Android requiere una notificación persistente para operación estable en segundo plano.
+Muestra el estado actual: Disconnected, Idle o Collecting Data.
+Esto no implica un uso excesivo de batería.
+
+### ¿Cómo puedo verificar que la app está funcionando correctamente?
+
+Primero revisa el dashboard: los viajes deben registrarse y los gráficos del viaje deben mostrar trazas de parámetros en el tiempo.
+No basta con ver solo una entrada de viaje; también debes ver curvas de señales dentro de ese viaje.
+Si aparece el viaje pero los gráficos están vacíos, la subida de datos no se está completando correctamente.
+
+En el siguiente trayecto, abre la app en el vehículo y confirma que el estado sea Collecting Data.
+Si no llega a Collecting Data, desconecta el dongle, reinicia la app y selecciona el dongle nuevamente.
+
+Como verificación adicional, muchos dongles muestran parpadeo rápido de LED cuando la comunicación app-dongle está activa.
 
 ## Dongles
 
 ### ¿Qué tipo de dongle necesito?
 
-Un dongle BLE.
-Lo habitual es que sea compatible con ELM327.
+Se requiere un dongle Bluetooth Low Energy.
+Los chipsets compatibles con ELM327 son los más comunes.
+La estabilidad del firmware es importante para una comunicación confiable.
 
 ### ¿Sirve cualquier dongle barato?
 
-No siempre. Algunos adaptadores genéricos son inestables y generan huecos de datos.
+Algunos adaptadores genéricos responden de forma inconsistente.
+Un firmware inestable puede causar huecos de datos.
+Se recomienda usar modelos verificados.
 
-### ¿El dongle descarga la batería de 12V?
+### ¿El dongle descarga mi batería de 12V?
 
-En uso normal, no debería generar un riesgo significativo.
-Para periodos largos sin usar el coche, se recomienda desconectarlo.
+No. En uso normal, un dongle BLE compatible no genera un riesgo significativo de descarga de batería de 12V.
+
+El consumo típico de un dongle está en decenas de miliamperios. Para una batería de 12V y 60Ah (común en autos pequeños), incluso una carga continua de 30mA equivale a aproximadamente 0.72Ah por día (0.03A x 24h), alrededor de 1.2% de la capacidad nominal por día.
+Este es un cálculo conservador que no contempla uso del vehículo durante ese período.
+
+Muchos dongles también entran en auto-sleep, lo que reduce aún más el impacto real en espera.
+Las pruebas de validación de Naubat no mostraron problemas relevantes de batería de 12V en operación normal.
+
+Para períodos largos sin usar el vehículo, desconectar el dongle sigue siendo la práctica recomendada, igual que con cualquier consumidor eléctrico no esencial.
 
 ### ¿Es seguro para mi vehículo?
 
-Sí. Naubat solo hace lectura.
+Naubat envía solicitudes de diagnóstico de solo lectura.
 No realiza codificación ni cambios de configuración.
+No se realiza flasheo de firmware.
+
+### ¿Puedo usar Naubat y otra app al mismo tiempo con un solo dongle?
+
+No. Esta configuración no está soportada para una operación confiable.
+Incluso si Naubat conecta por el perfil BLE y otra app conecta por Bluetooth clásico, la calidad de extracción diagnóstica usualmente no es aceptable en uso real.
+
+### ¿Puedo usar un splitter OBD con dos dongles, uno para Naubat y otro para otra app?
+
+Puede funcionar en algunos casos, pero no está garantizado ni recomendado.
+Con dos dongles en un splitter, el timing de solicitud-respuesta en la ruta CAN de diagnóstico no queda sincronizado entre herramientas, lo que puede reducir la fiabilidad.
 
 ## Conectividad
 
-### ¿Por qué se ha dividido un viaje en dos?
+### ¿Por qué mi viaje se dividió en dos partes?
 
-Si hay una interrupción larga en la subida de datos, una sesión puede mostrarse como dos viajes.
+Si hay una interrupción larga en la subida de datos, una sesión de manejo puede mostrarse como dos viajes.
+La recolección de datos puede seguir localmente durante problemas temporales de conectividad.
+La segmentación del viaje se aplica cuando los datos se presentan.
 
-### ¿Por qué sigo viendo conectado al alejarme del coche?
+### Dejé el auto, pero la app sigue mostrando conectado. ¿Es normal?
 
-El alcance BLE puede ser alto.
-Si el vehículo está en reposo, la app debería pasar a `Idle`.
+Sí. El alcance BLE puede ser alto, y la desconexión puede requerir alejarse al menos unos 25 metros del vehículo.
+Si el vehículo está en reposo, la app debería pasar a Idle aunque la conexión se mantenga.
+En Idle no se hace polling del vehículo ni se suben datos; solo continúan verificaciones del estado del dongle.
+Si no entra en Idle, el dongle puede seguir reportando alimentación de 12V por encima del umbral activo, algo que puede ocurrir por ejemplo durante carga.
+Algunos modelos también mantienen activos por más tiempo sistemas relacionados con alto voltaje después de estacionar.
+Por ejemplo, modelos Kia suelen transicionar más rápido, mientras que algunos modelos VW pueden permanecer varios minutos en este comportamiento intermedio.
+
+### ¿Por qué se activa la alarma del coche después de bloquear el vehículo?
+
+Este problema se identificó en algunos vehículos nuevos MY25, incluyendo modelos de marcas como VW y MG.
+Está relacionado con un comportamiento adicional de protección antirrobo que puede activar la alarma cuando la comunicación diagnóstica alcanza ciertas ECUs con el vehículo bloqueado.
+No se produce simplemente por tener un dongle conectado al puerto OBD.
+
+Para reducir este comportamiento, se están aplicando medidas del lado de la app para que, en marcas afectadas, la comunicación se mantenga solo cuando el vehículo está encendido.
+Dongles con auto-sleep y auto-wake rápidos también pueden mitigar este problema, y eso forma parte del enfoque de configuración de dongles en Naubat.
+
+Si aun así ocurre ocasionalmente, la solución práctica actual es desconectar el dongle al finalizar el viaje y volver a conectarlo manualmente antes del siguiente.
+
+### ¿Por qué faltan puntos finales de datos del viaje?
+
+Si un viaje termina sin cobertura de internet, el tramo final puede faltar en los datos subidos.
+La app puede seguir operando sin internet, pero los datos pendientes solo se suben después de recuperar conectividad mientras la app vuelve a estar en Collecting Data.
+Si la conectividad vuelve cuando ya te alejaste del vehículo y la app está Disconnected, ese tramo final offline puede perderse.
 
 ## Datos y precisión
 
 ### ¿Por qué algunos valores no se actualizan?
 
-Puede deberse a vehículo en reposo, desconexión o inestabilidad temporal de comunicación.
+El vehículo puede estar en reposo.
+La app puede estar desconectada.
+Inestabilidad temporal de comunicación puede retrasar actualizaciones.
+Los valores se actualizan solo cuando se reciben respuestas válidas.
 
-### ¿Por qué el consumo difiere del del coche?
+### ¿Por qué mi consumo se ve diferente al del display del coche?
 
-Puede haber diferencias de metodología, fuente de distancia (GPS vs odómetro) y redondeos del fabricante.
+Las metodologías de cálculo pueden ser distintas.
+La fuente de distancia puede diferir, por ejemplo GPS versus odómetro.
+Los fabricantes pueden aplicar su propio redondeo y filtrado.
+Naubat aplica reglas de validación estructuradas antes de mostrar valores.
 
-### ¿Dónde se alojan mis datos?
+### ¿Por qué un viaje aparece marcado como no confiable?
 
-Los datos se almacenan en infraestructura AWS con controles de seguridad.
+Puede deberse a problemas de continuidad de datos, inestabilidad de comunicación o falta de señales críticas.
+Los viajes marcados como no confiables se excluyen de estadísticas agregadas.
+
+### ¿Por qué no veo viajes más antiguos?
+
+El historial de viajes depende del nivel de suscripción.
+Solo se almacenan viajes registrados mientras la app estuvo activa.
+
+### ¿Puedo descargar mis datos de viaje localmente?
+
+Sí. Los datos de viaje se pueden exportar como CSV desde el panel Trips.
+
+### ¿Dónde se alojan mis datos y cómo se protegen?
+
+Los datos se almacenan en bases de datos alojadas en AWS.
+El acceso está protegido con controles estrictos de seguridad y capas de seguridad de AWS.
+
+Este FAQ se actualiza de forma continua a medida que se identifican nuevos escenarios de uso.

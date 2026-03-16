@@ -5,27 +5,32 @@ description: "Categorías de vehículos soportadas y requisitos de interfaz"
 
 # Compatibilidad de vehículos
 
-Naubat está diseñado para vehículos electrificados que exponen datos de diagnóstico mediante interfaces accesibles.
+Naubat está diseñado para vehículos electrificados que exponen datos de diagnóstico mediante interfaces de vehículo accesibles. La compatibilidad depende tanto de la implementación del lado del vehículo como del comportamiento de acceso diagnóstico.
 
-## Tipos soportados
+## Tipos de vehículos soportados
 
-Naubat soporta BEV, PHEV e híbridos cuando las señales de batería necesarias están disponibles.
-Vehículos de combustión sin batería de alto voltaje no están soportados.
+Naubat soporta vehículos eléctricos a batería (BEV), híbridos enchufables (PHEV) e híbridos donde las señales de batería requeridas están disponibles.
+Los vehículos de combustión interna sin sistemas de batería de alto voltaje no están soportados.
 
 ## Variabilidad por modelo
 
 La disponibilidad de datos varía por fabricante y modelo.
-La estructura de señales puede cambiar entre marcas.
+La estructura y el nombre de señales pueden diferir entre marcas e implementaciones de unidades de control.
+La capacidad de muestreo depende de cómo cada vehículo expone y entrega datos diagnósticos.
 
-## Requisitos de interfaz de diagnóstico
+## Requisitos de interfaz diagnóstica
 
-Se requiere puerto físico OBD-II estándar.
-El vehículo debe permitir acceso a datos de diagnóstico por esa interfaz.
+Se requiere un puerto físico OBD-II estándar.
+El vehículo debe permitir acceso a datos de diagnóstico a través de esa interfaz.
+Algunos modelos pueden restringir acceso a ciertas unidades de control o señales.
 
 ## Mejora continua
 
-La lista de compatibilidad evoluciona con nuevas validaciones.
+La lista de compatibilidad se publica en el sitio web de Naubat y evoluciona con el tiempo a medida que se prueban y validan más vehículos.
 
-Estados de compatibilidad:
-- `Beta`: operativo, con parámetros aún en validación.
-- `Totalmente soportado`: validación completa de señales requeridas.
+El estado de cada vehículo se agrupa en dos categorías:
+
+- Beta: el modelo es operativo, pero algunos parámetros aún están pendientes o en validación de fiabilidad con usuarios reales.
+- Totalmente soportado: el modelo completó la validación del conjunto de señales requerido.
+
+La validación se realiza comparando valores recolectados contra herramientas profesionales de diagnóstico y confirmando el comportamiento con usuarios reales en sesiones reales de conducción.

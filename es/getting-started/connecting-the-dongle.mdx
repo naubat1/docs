@@ -5,33 +5,43 @@ description: "Cómo Naubat detecta y conecta dongles BLE compatibles"
 
 # Conectar el dongle
 
-Naubat detecta automáticamente dongles BLE compatibles en rango y establece comunicación cuando se cumplen las condiciones operativas.
+Naubat detecta automáticamente dongles de diagnóstico Bluetooth Low Energy compatibles que están dentro de alcance y establece comunicación cuando se cumplen las condiciones operativas normales.
 
 Antes de continuar, asegúrate de tener un dongle compatible. Ver [Dongles compatibles](/es/compatibility/compatible-dongles).
+El dongle se conecta al puerto OBD-II del vehículo, que utiliza una forma estandarizada de conector trapezoidal de 16 pines.
+Este puerto suele estar debajo del volante del lado del conductor, aunque la ubicación varía por modelo.
+Si no lo encuentras de inmediato, una búsqueda online de tu modelo específico suele mostrar la ubicación exacta.
+
+Marcador de imagen: forma del puerto OBD-II y ubicación típica del lado del conductor.
+
+Después de conectar el dongle, su nombre BLE se vuelve visible en la pantalla de conexión de la app.
+Selecciona el dongle en la lista para iniciar la secuencia de conexión app-dongle.
+Cuando las condiciones del vehículo están activas y la comunicación comienza, la app pasa a Collecting Data.
 
 ## Estados operativos
 
 ### Disconnected
 
-- Dongle fuera de rango.
-- App en segundo plano.
+- Dongle fuera de alcance.
+- App ejecutándose en segundo plano.
 - Sin interacción con el vehículo.
 
 ### Idle
 
 - Dongle detectado.
-- Vehículo en reposo.
-- Sin solicitudes activas.
+- Vehículo en estado de reposo.
+- Sin solicitudes activas de datos.
 
 ### Connected
 
 - Teléfono conectado al dongle.
-- Aún no hay intercambio activo de diagnóstico.
+- Aún no hay intercambio activo de mensajes de diagnóstico.
+- Estado intermedio antes de Collecting Data.
 
 ### Collecting Data
 
 - Vehículo activo.
-- Solicitudes estructuradas continuas.
-- Monitorización de señales de batería y viaje.
+- Solicitudes estructuradas continuas de datos.
+- Señales de batería y viaje bajo monitoreo.
 
 `Disconnected -> Idle -> Connected -> Collecting Data`

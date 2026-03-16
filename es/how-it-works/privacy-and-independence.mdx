@@ -1,38 +1,58 @@
 ---
 title: "Privacidad e independencia"
-description: "Cómo gestiona Naubat la independencia diagnóstica y la privacidad"
+description: "Cómo Naubat gestiona la independencia diagnóstica y la privacidad de datos"
 ---
 
 # Privacidad e independencia
 
-Naubat está diseñado para ofrecer acceso independiente y estructurado a datos de diagnóstico relacionados con batería. La independencia y la transparencia son principios clave.
+Naubat está diseñado para ofrecer acceso independiente y estructurado a datos de diagnóstico relacionados con batería. El sistema es multimarca por diseño, y tanto la independencia como la transparencia son principios operativos centrales.
 
 ## Acceso diagnóstico directo
 
-Naubat se comunica directamente con el vehículo mediante protocolos de diagnóstico estandarizados.
-El principal es UDS (Unified Diagnostic Services), usado también en talleres profesionales.
-No se usan APIs cloud del fabricante ni servicios telemáticos del fabricante.
+Naubat se comunica directamente con el vehículo mediante protocolos de diagnóstico automotriz estandarizados.
+El protocolo principal utilizado es UDS, Unified Diagnostic Services.
+Esta es la misma capa diagnóstica usada en talleres profesionales y durante servicios de mantenimiento.
+No se utilizan APIs cloud del fabricante.
+No se requieren servicios telemáticos del fabricante.
+
+El acceso directo al bus de diagnóstico habilita señales de batería estructuradas y de alta fidelidad.
+Este enfoque evita dependencia de ecosistemas de apps específicos del fabricante.
+El objetivo no es reemplazar herramientas del fabricante, sino aportar una perspectiva técnica adicional y fundamentada.
 
 ## Filosofía multimarca
 
 Naubat no está afiliado a ningún fabricante de vehículos.
 El sistema está diseñado para operar entre marcas.
-La compatibilidad se prioriza por demanda de usuarios y viabilidad técnica.
+El soporte de vehículos se prioriza según demanda de usuarios y viabilidad técnica.
+La compatibilidad depende de acceso confiable a las señales de batería requeridas.
+
+El objetivo es proporcionar una segunda capa técnica de análisis.
+Información de batería que frecuentemente no se expone al conductor puede estructurarse y analizarse.
+El enfoque se mantiene independiente de la marca.
+
+## Experiencia en baterías
+
+El enfoque analítico se apoya en metodologías de análisis de baterías usadas en otros dominios de almacenamiento energético.
+Técnicas comúnmente usadas en sistemas de almacenamiento estacionario y análisis industrial de baterías se adaptan al uso automotriz.
+Combinar diagnóstico vehicular profesional con experiencia en baterías permite un análisis técnico más profundo.
 
 ## Privacidad de datos
 
-Solo se recoge el email del usuario para autenticación y comunicación.
-No se almacena VIN.
-No se crea un perfil personal de conducción identificable.
-No se requiere cuenta de fabricante ni conexión al cloud del fabricante.
+Solo se recopila el email del usuario para autenticación y comunicación.
+No se almacena el VIN.
+No se crea un perfil personal identificable de conducción.
+No se requiere cuenta de fabricante.
+No se requiere conexión cloud del fabricante.
 
-## Operación solo lectura
+## Operación de solo lectura
 
-Naubat realiza solicitudes de diagnóstico de solo lectura.
-No modifica parámetros.
-No realiza configuración, codificación ni flasheo de firmware.
+Naubat realiza solicitudes diagnósticas de solo lectura.
+No se modifican parámetros.
+No se realiza configuración, codificación ni flasheo de firmware.
+No se altera el comportamiento del vehículo.
+
+Este modelo operativo está diseñado para ser seguro y no intrusivo.
 
 ## Por qué importa la independencia
 
-El acceso diagnóstico directo permite análisis transparente de batería.
-Un sistema independiente de marca mantiene una metodología consistente entre vehículos.
+El acceso diagnóstico directo permite análisis transparente de batería. Un sistema independiente de marca proporciona una metodología consistente entre vehículos. La independencia favorece una interpretación objetiva de señales relacionadas con batería.

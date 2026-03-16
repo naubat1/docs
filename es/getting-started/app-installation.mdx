@@ -1,25 +1,30 @@
 ---
 title: "Instalación de la app"
-description: "Instala Naubat y completa la configuración inicial"
+description: "Instala Naubat y completa los primeros pasos de configuración"
 ---
 
 # Instalación de la app
 
-Naubat está disponible en Android e iOS. La instalación se realiza desde la tienda de cada plataforma.
+Naubat está disponible en Android e iOS. La instalación se realiza desde la tienda de cada plataforma. Después de instalar, el primer paso importante es el acceso a cuenta y la configuración inicial dentro de la app.
 
 ## Primer inicio (todas las plataformas)
 
-Al abrir la app por primera vez, crea una cuenta o inicia sesión.
-Si ya activaste tu plan Naubat, usa esa misma cuenta.
+Cuando abras la app por primera vez, crea una cuenta o inicia sesión con tu cuenta Naubat existente.
+Si ya creaste una cuenta al activar tu plan Naubat, usa esa misma cuenta.
+La autenticación se gestiona mediante un flujo externo de AWS Cognito.
 
-Tras el login, selecciona tu vehículo y completa los campos requeridos.
-Luego continúa con la selección del dongle.
+Después del login, selecciona tu vehículo y completa los campos de configuración requeridos.
+Luego continúa a la selección del dongle.
 Consulta [Conectar el dongle](/es/getting-started/connecting-the-dongle).
+
+Los videos a continuación muestran un flujo completo donde el dongle ya está conectado al puerto OBD del vehículo.
+No necesitas completar todo el flujo en una sola sesión.
+Los permisos y la selección del vehículo pueden completarse justo después de instalar, y la primera conexión del dongle puede hacerse más tarde cuando estés en el vehículo y el dongle esté conectado.
 
 ## Primeros pasos en Android
 
-Instala la app desde Google Play, ábrela y completa login y configuración inicial del vehículo.
-Después selecciona tu dongle en la pantalla de conexión de la app.
+Instala la app desde Google Play, ábrela y completa login y configuración del vehículo.
+Luego selecciona tu dongle desde la pantalla de conexión de la app.
 
 <iframe
   width="100%"
@@ -31,16 +36,24 @@ Después selecciona tu dongle en la pantalla de conexión de la app.
   allowFullScreen
 />
 
-Vídeo Android: https://youtube.com/shorts/UoJoFFNp7zU?feature=share
+Video Android: https://youtube.com/shorts/UoJoFFNp7zU?feature=share
 
 ## Primeros pasos en iOS
 
-Instala la app desde App Store, ábrela y completa login y configuración inicial del vehículo.
-Después selecciona tu dongle en la pantalla de conexión de la app.
+Instala la app desde App Store, ábrela y completa login y configuración del vehículo.
+Luego selecciona tu dongle desde la pantalla de conexión de la app.
 
-Enlace de vídeo iOS (pendiente): https://www.youtube.com/watch?v=IOS_VIDEO_ID
+Enlace de video de configuración iOS (pendiente): https://www.youtube.com/watch?v=IOS_VIDEO_ID
 
 ## Permisos Android por fabricante
 
-Algunos fabricantes Android aplican políticas más estrictas en segundo plano.
-Revisa [Permisos de la app](/es/getting-started/app-permissions).
+Algunos fabricantes Android aplican políticas más estrictas para segundo plano.
+Revisa [Permisos de la app](/es/getting-started/app-permissions) para ver recomendaciones de segundo plano y optimización de batería por fabricante.
+
+## Validación de configuración inicial
+
+Para la primera validación, es importante dejar la app ejecutándose en Collecting Data y comenzar en un lugar con conectividad a internet.
+Luego revisa el dashboard para confirmar que los datos se están subiendo y se ven en los paneles.
+Deberías ver actualizaciones en Latest Readings y gráficos de parámetros en el panel Trips.
+Ten en cuenta que un viaje puede no aparecer inmediatamente después del primer trayecto: el primer registro de viaje puede tardar hasta aproximadamente 5 minutos después de terminar el trayecto.
+Aunque el viaje todavía no aparezca en la tabla de viajes, las trazas de parámetros del vehículo ya deberían verse en los gráficos inferiores del panel Trips, como voltaje, corriente y temperatura.

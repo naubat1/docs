@@ -5,40 +5,48 @@ description: "Cómo Naubat se comunica con el vehículo mediante un dongle BLE O
 
 # App y dongle
 
-Naubat se comunica directamente con el sistema de diagnóstico del vehículo a través de un dongle OBD-II Bluetooth Low Energy. El modelo de comunicación sigue procedimientos estándar del sector automotriz.
+Naubat se comunica directamente con el sistema de diagnóstico del vehículo a través de un dongle OBD-II Bluetooth Low Energy. El modelo de comunicación sigue procedimientos de diagnóstico automotriz estándar, usados por herramientas profesionales.
+
+Marcador de diagrama: Smartphone a dongle BLE a puerto OBD a ECUs del vehículo.
 
 ## Comunicación de diagnóstico
 
-Los vehículos modernos incorporan múltiples ECUs (Electronic Control Units).
+Los vehículos modernos incluyen múltiples Unidades de Control Electrónico, también conocidas como ECUs.
 Estas ECUs intercambian información a través de redes internas del vehículo.
-Los estándares de diagnóstico automotriz permiten acceso estructurado de lectura a parámetros del vehículo.
-Naubat usa servicios estandarizados, incluyendo UDS (Unified Diagnostic Services).
+Los estándares de diagnóstico automotriz proporcionan acceso estructurado de lectura a parámetros del vehículo.
+Naubat usa servicios de diagnóstico estandarizados, incluyendo UDS, Unified Diagnostic Services.
+Este tipo de comunicación se usa en talleres profesionales y durante servicios de mantenimiento.
 
-Naubat realiza solicitudes de diagnóstico solo de lectura.
-No modifica parámetros del vehículo.
-No realiza codificación, flasheo ni cambios de configuración.
+Naubat realiza solicitudes de diagnóstico de solo lectura.
+No se modifican parámetros del vehículo.
+No se realiza codificación, flasheo ni cambios de configuración.
+
+Este modelo de solo lectura es no intrusivo y está diseñado para operación segura.
 
 ## ¿Qué es un dongle OBD?
 
-El puerto OBD-II proporciona acceso físico estandarizado al diagnóstico.
-El dongle Bluetooth actúa como puente entre smartphone y vehículo.
-Muchos dongles de consumo se basan en chipsets compatibles con ELM327.
+El puerto OBD-II proporciona acceso físico estandarizado al diagnóstico del vehículo.
+Un dongle Bluetooth actúa como puente de comunicación entre smartphone y vehículo.
+La mayoría de dongles de consumo se basan en chipsets compatibles con ELM327.
+ELM327 es un chip intérprete de diagnóstico ampliamente adoptado en múltiples herramientas.
 
-La estabilidad de conexión y la calidad de firmware afectan a la fiabilidad.
-Naubat requiere dongles BLE para operación estable en segundo plano.
+Existen múltiples versiones de firmware y niveles de calidad.
+La estabilidad de conexión y la calidad del firmware afectan la fiabilidad de comunicación.
+Naubat requiere dongles BLE para funcionamiento estable en segundo plano.
 
 ## Modelo de comunicación
 
-La app detecta el dongle automáticamente cuando está en rango.
-Cuando el vehículo está activo, se inician solicitudes de diagnóstico estructuradas.
-La recogida de datos continúa mientras el vehículo está operativo.
-Cuando el vehículo vuelve a reposo, la comunicación activa se pausa.
+La app detecta el dongle automáticamente cuando está en alcance.
+Cuando el vehículo se vuelve activo, se inician solicitudes diagnósticas estructuradas.
+La recolección de datos continúa mientras el vehículo está en operación.
+Cuando el vehículo vuelve a estado de reposo, la actividad de comunicación se pausa.
 
 ## Consumo energético e impacto en batería de 12V
 
-La mayoría de dongles consumen solo decenas de miliamperios.
-Muchos incluyen modo auto-sleep o bajo consumo.
-Naubat comunica únicamente cuando es necesario para la recogida de datos.
+La mayoría de dongles comerciales consumen solo decenas de miliamperios durante operación.
+Muchos dongles modernos incluyen auto-sleep o modos de bajo consumo.
+Cuando no se detecta actividad de vehículo o Bluetooth, estos dongles suelen entrar en estado de consumo reducido.
+Naubat comunica solo cuando es necesario para la recolección diagnóstica.
 
 El sistema está diseñado para no causar un drenaje significativo de la batería de 12V en uso normal.
-Para periodos largos de inactividad, se recomienda desconectar el dongle como precaución.
+Para periodos extendidos de inactividad de varios días o más, se recomienda desconectar el dongle como precaución.

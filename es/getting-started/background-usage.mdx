@@ -5,25 +5,29 @@ description: "Cómo funciona Naubat en segundo plano en Android e iOS"
 
 # Funcionamiento en segundo plano
 
-Naubat está diseñado para monitorización continua y pasiva con mínima interacción del usuario.
+Naubat está diseñado para monitoreo pasivo y continuo con mínima interacción del usuario, manteniendo una comunicación Bluetooth consistente y un comportamiento estable de recolección de datos.
 
-## Cómo funciona
+## Cómo funciona en segundo plano
 
-La app busca dongles BLE compatibles y se reconecta automáticamente cuando están disponibles.
-Según las condiciones, cambia entre `Disconnected`, `Idle` y `Collecting Data`.
+La app escanea dongles Bluetooth Low Energy compatibles y reconecta automáticamente cuando vuelven a estar disponibles.
+A medida que cambian las condiciones operativas, transiciona entre estados Disconnected, Idle y Collecting Data.
+Estas transiciones se gestionan automáticamente en uso normal.
 
 ## Comportamiento en Android
 
-Android requiere una notificación activa de servicio en primer plano.
-Las políticas de optimización de batería del fabricante pueden afectar la fiabilidad en segundo plano.
+Android requiere una notificación activa en primer plano para operación persistente en segundo plano.
+La optimización de batería puede afectar si los procesos en segundo plano se mantienen activos con el tiempo.
+La fiabilidad en segundo plano depende en parte de la configuración de sistema de cada fabricante.
 
 ## Comportamiento en iOS
 
-En la versión actual, el funcionamiento en segundo plano está soportado en condiciones normales del sistema.
-Si se desactiva y activa Bluetooth, puede ser necesario reabrir la app en algunos casos.
+En la versión actual, el funcionamiento en segundo plano está soportado bajo condiciones normales del sistema.
+Si Bluetooth se desactiva y activa, en algunos casos puede ser necesario reabrir la app para restaurar el comportamiento esperado.
+El comportamiento de la versión actual puede evolucionar en futuras actualizaciones.
 
 ## Conectividad a internet
 
-Cuando no hay internet, los datos se almacenan temporalmente en local.
-Se conservan hasta 10 minutos.
-Los paneles se actualizan en lotes, aproximadamente cada minuto.
+Los datos se almacenan temporalmente en local cuando no hay conectividad a internet.
+Se retienen hasta 10 minutos de datos en buffer.
+Más allá de ese límite, los datos antiguos en buffer se reemplazan usando una estrategia FIFO.
+Las actualizaciones del dashboard se entregan en lotes con intervalos aproximados de un minuto.
