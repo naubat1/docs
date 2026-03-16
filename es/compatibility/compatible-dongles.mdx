@@ -55,3 +55,103 @@ Si quieres máxima estabilidad:
 - Lectura de voltaje razonablemente precisa
 
 Recomendación actual: **[vLinker FD+](https://amzn.to/4b8PYrc)**.
+
+## Configuración y validación avanzada
+
+Las secciones a continuación son opcionales. Están destinadas a usuarios que quieran inspeccionar o ajustar el comportamiento del dongle más profundamente.
+
+<AccordionGroup>
+  <Accordion title="Revisar parámetros programables">
+    Los dongles compatibles en esta categoría exponen parámetros programables.
+    Usa el comando `AT PPS` para inspeccionarlos.
+
+    ```text
+    > AT PPS
+    00:FF F 01:FF F 02:FF F 03:32 F
+    04:01 F 05:FF F 06:F1 F 07:09 F
+    08:FF F 09:00 F 0A:0A F 0B:FF F
+    0C:68 F 0D:0D F 0E:7A N 0F:D5 F
+    10:0D F 11:00 F 12:FF F 13:55 F
+    14:50 F 15:0A F 16:FF F 17:92 F
+    18:31 F 19:4F F 1A:0A F 1B:0A F
+    1C:03 F 1D:0F F 1E:4A F 1F:FF F
+    20:5D F 21:FF F 22:FF F 23:FF F
+    24:00 F 25:00 F 26:00 F 27:FF F
+    28:FF F 29:FF F 2A:3C F 2B:02 F
+    2C:01 N 2D:01 N 2E:80 F 2F:0A F
+    ```
+  </Accordion>
+
+  <Accordion title="Parámetro de auto-sleep PP 0E">
+    El parámetro programable `PP 0E` controla el comportamiento de auto-sleep.
+
+    Para los dongles compatibles que conocemos, este es el parámetro relevante para:
+
+    - Si el auto-sleep está habilitado
+    - Cuánto tiempo debe durar la inactividad antes del sueño
+    - Si se permite el comportamiento de bajo consumo
+
+    Dos valores comunes son:
+
+    | Valor | Significado típico |
+    | --- | --- |
+    | `FA` | Auto-sleep habilitado, comportamiento de timeout más largo |
+    | `A2` | Auto-sleep habilitado, comportamiento de timeout más corto |
+
+    La interpretación exacta a nivel de bits depende de la implementación del firmware, pero este es el parámetro que rige el perfil de sueño.
+  </Accordion>
+
+  <Accordion title="Establecer PP 0E manualmente">
+    Un patrón de configuración común es:
+
+    ```text
+    > ATPP0ESVXX
+    OK
+    ```
+
+    Reemplaza `XX` con el valor deseado, por ejemplo `FA` o `A2`.
+
+    Después de cambiar el valor, valida el comportamiento real en lugar de asumir que el cambio se aplicó completamente:
+
+    - Apaga el vehículo
+    - Espera el timeout esperado
+    - Verifica si el dongle realmente desaparece del descubrimiento BLE
+    - Enciende el vehículo nuevamente y verifica que vuelva a estar accesible
+  </Accordion>
+
+  <Accordion title="Revisar voltaje con AT RV">
+    Para inspeccionar el voltaje de alimentación reportado:
+
+    ```text
+    > AT RV
+    12.4V
+    ```
+
+    Compáralo con una medición directa de la batería usando un multímetro.
+    Si ambos valores están cerca, el dongle suele ser una mejor opción para la lógica de detección idle-versus-active de Naubat.
+  </Accordion>
+
+  <Accordion title="Corregir calibración de voltaje con AT CV">
+    Si el dongle reporta un voltaje claramente incorrecto, a veces puedes corregirlo con calibración de voltaje.
+
+    Procedimiento recomendado:
+
+    1. Mide el voltaje real de la batería de 12 V con un multímetro.
+    2. Lee el voltaje del dongle usando `AT RV`.
+    3. Si la diferencia es significativa, usa una app de terminal serial que pueda enviar comandos ELM327 raw.
+    4. Envía `AT CV dddd`, donde `dddd` representa el objetivo de calibración en voltios `dd.dd`.
+
+    Ejemplo:
+
+    ```text
+    > AT CV 1260
+    OK
+    ```
+
+    Una herramienta práctica para esto es **Serial Bluetooth Terminal**, o cualquier app equivalente que permita entrada manual de comandos.
+
+    <Warning>
+    Las pequeñas diferencias de voltaje suelen ser aceptables. Los errores más grandes pueden afectar la detección de estado de Naubat y también pueden indicar un comportamiento inconsistente del dongle en general.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
