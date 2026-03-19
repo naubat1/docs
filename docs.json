@@ -34,7 +34,8 @@
               "es/getting-started/app-installation",
               "es/getting-started/connecting-the-dongle",
               "es/getting-started/app-permissions",
-              "es/getting-started/background-usage"
+              "es/getting-started/background-usage",
+              "es/getting-started/first-data-and-timing"
             ]
           },
           {
@@ -77,7 +78,8 @@
               "en/getting-started/app-installation",
               "en/getting-started/connecting-the-dongle",
               "en/getting-started/app-permissions",
-              "en/getting-started/background-usage"
+              "en/getting-started/background-usage",      
+              "en/getting-started/first-data-and-timing"
             ]
           },
           {
@@ -122,19 +124,18 @@
         "href": "/en"
       }
     ]
-  }
-  ,
+  },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
